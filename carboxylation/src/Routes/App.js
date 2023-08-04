@@ -31,7 +31,9 @@ function App() {
             <button>Login</button>
           </Link>
  
-          <button>Register</button>
+          <Link to="/Register">
+            <button>Register</button>
+          </Link>
         </div>
 
       </div>
@@ -43,6 +45,7 @@ function App() {
         </p>
 
       </header>
+
     </div>
   );
 }

@@ -9,7 +9,7 @@ import './index.css';
 import App from './Routes/App';
 import Err from './Routes/Err'
 import Login from './Routes/Login';
-
+import Register from './Routes/Register';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +19,12 @@ const router = createBrowserRouter([
 
   {
     path: "/Login",
-    element: <Login />,
+    element: <Login/>,
+  },
+
+  {
+    path: "/Register",
+    element: <Register/>,
   },
 
 ]);
