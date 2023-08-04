@@ -6,10 +6,18 @@ import {
 } from "react-router-dom";
 
 import './index.css';
+
+
+
+
 import App from './Routes/App';
 import Err from './Routes/Err'
 import Login from './Routes/Login';
 import Register from './Routes/Register';
+
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",

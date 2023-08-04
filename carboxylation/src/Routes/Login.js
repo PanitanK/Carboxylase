@@ -1,19 +1,46 @@
 import './css/App.css';
-import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
-import React, { useState } from 'react';
 
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { auth } from './Firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
-  const [username, setUsername] = useState('');
+  const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [ErrMSG, setErrMsg] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const Log = async (event) => {
     event.preventDefault();
-    // Perform login logic here, e.g., send the username and password to the server for validation
-    console.log('Submitted username:', username);
+    console.log('Submitted username:', email);
     console.log('Submitted password:', password);
+
+
+    try {
+      signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
+        // The user has been successfully created. You can access the user data as follows:
+
+        const user = userCredential.user;
+        //console.log("New user created:", user);
+        setErrMsg(null);
+        navigate('/login');
+
+      }).catch((error) => {
+    // Handle any errors that occur during user creation
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrMsg(errorCode + "  " + errorMessage);
+    
+    // You can display the error message to the user or perform other error handling tasks.
+  });
+     
+    } catch (error) {
+      console.error("Error creating user:");
+    }
   };
   
   return (
@@ -29,13 +56,14 @@ function Login() {
 
      <div className="App-header">
         <h1>Login page</h1>
-        <form onSubmit={handleSubmit}>
+        <Link to="/Register">Don't have an account?</Link>
+        <form onSubmit={Log}>
           <div>
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="Email">Email:</label>
             <input
               type="text"
-              id="username"
-              value={username}
+              id="Email"
+              value={email}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
@@ -50,10 +78,12 @@ function Login() {
               required
             />
           </div>
+          <p>{ErrMSG}</p>
+          <Link to="/forgot-password">Forgot Password?</Link>
           <button type="submit">Login</button>
         </form>
         {/* Add a link to a "Forgot Password" page if needed */}
-        <Link to="/forgot-password">Forgot Password?</Link>
+        
       </div>
     </div>
 

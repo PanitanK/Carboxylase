@@ -1,20 +1,54 @@
 import './css/App.css';
 //import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
+
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { auth } from './Firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+
 
 
 function Register() {
 
-  const [username, regUsername] = useState('');
+  const [email, regEmail] = useState('');
   const [password, regPassword] = useState('');
+  const [ErrMSG, setErrMsg] = useState(null);
+  const navigate = useNavigate();
+  //const des = collection(firebase,"USERS")
 
-  const handleSubmit = (event) => {
+  const Reg = async (event) => {
     event.preventDefault();
-    
-    console.log('Submitted username:', username);
+    console.log('Submitted username:', email);
     console.log('Submitted password:', password);
+
+
+    try {
+      createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
+        // The user has been successfully created. You can access the user data as follows:
+
+        const user = userCredential.user;
+        //console.log("New user created:", user);
+        setErrMsg(null);
+        navigate('/login');
+
+      }).catch((error) => {
+    // Handle any errors that occur during user creation
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrMsg(errorCode + "  " + errorMessage);
+    
+    // You can display the error message to the user or perform other error handling tasks.
+  });
+     
+    } catch (error) {
+      console.error("Error creating user:");
+    }
   };
+
+
   
   return (
     
@@ -29,19 +63,20 @@ function Register() {
 
      <div className="App-header">
         <h1>Register</h1>
-        <form onSubmit={handleSubmit}>
+        
+        <form onSubmit={Reg}>
           <div>
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="Email">Email:</label>
             <input
               type="text"
               id="username"
-              value={username}
-              onChange={(e) => regUsername(e.target.value)}
+              value={email}
+              onChange={(e) => regEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="Password">Password:</label>
             <input
               type="password"
               id="password"
@@ -50,6 +85,8 @@ function Register() {
               required
             />
           </div>
+          <Link to="/Login">Already a user ?</Link>
+          <p>{ErrMSG}</p>
           <button type="submit">ENTER</button>
           
         </form>
