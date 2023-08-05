@@ -19,10 +19,8 @@ export default function Err() {
 
       <div className="App-header">
         <h1>Oops!</h1>
-          <p>Sorry, an unexpected error has occurred.</p>
-            <p>
-              <i>{error.statusText || error.message}</i>
-            </p>
+        <p>Sorry, an unexpected error has occurred.</p>
+        <p><i>{error.statusText || error.message}</i></p>
       </div>
     </div>
   );

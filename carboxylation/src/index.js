@@ -14,7 +14,7 @@ import App from './Routes/App';
 import Err from './Routes/Err'
 import Login from './Routes/Login';
 import Register from './Routes/Register';
-
+import Profile from './Routes/Profile';
 
 
 
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/Register",
     element: <Register/>,
+  },
+  {
+    path: "/Profile",
+    element: <Profile/>,
   },
 
 ]);

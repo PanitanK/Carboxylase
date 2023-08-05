@@ -24,7 +24,7 @@ function Login() {
       signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
         // The user has been successfully created. You can access the user data as follows:
 
-        const user = userCredential.user;
+        const _user = userCredential.user;
         //console.log("New user created:", user);
         setErrMsg(null);
         navigate('/login');
