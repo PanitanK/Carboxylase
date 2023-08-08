@@ -1,95 +1,88 @@
-  import './css/App.css';
-  import Title from './image/logo/CBX_Transparent.png';
+import './css/App.css';
+import Title from './image/logo/CBX_Transparent.png';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { auth } from './Firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
-  import { Link } from "react-router-dom";
-  import React, { useState } from 'react';
-  import { auth } from './Firebase';
-  import { signInWithEmailAndPassword } from 'firebase/auth';
-  import { useNavigate } from 'react-router-dom';
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState(null);
+  const navigate = useNavigate();
 
-  function Login() {
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    console.log('Submitted username:', email);
+    console.log('Submitted password:', password);
 
-    const [email, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [ErrMSG, setErrMsg] = useState(null);
-    const navigate = useNavigate();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const _user = userCredential.user;
+      console.log(userCredential)
+      console.log(_user.uid)
+      setErrMsg(null);
+      navigate('/Login/Home', { state: { userUID: _user.uid } });
 
-    const Log = async (event) => {
-      event.preventDefault();
-      console.log('Submitted username:', email);
-      console.log('Submitted password:', password);
-
-
-      try {
-        signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
-          // The user has been successfully created. You can access the user data as follows:
-
-          const _user = userCredential.user;
-          //console.log("New user created:", user);
-          setErrMsg(null);
-          navigate('/profile');
-
-        }).catch((error) => {
-      // Handle any errors that occur during user creation
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      setErrMsg(errorCode + "  " + errorMessage);
-      
-      // You can display the error message to the user or perform other error handling tasks.
-    });
-      
-      } catch (error) {
-        console.error("Error creating user:");
-      }
-    };
-    
-    return (
-      
+      setErrMsg(errorCode + '  ' + errorMessage);
+    }
+  };
+
+  return (
     <div className="App">
       <div className="static-bar">
         <div className="left-content">
           <a href="/">
-            <img src={Title} alt="Title" /> 
+            <img src={Title} alt="Title" />
           </a>
+        </div>
+
+        <div className="right-content">
+          <Link to="/Login">
+            <button>Login</button>
+          </Link>
+
+          <Link to="/Register">
+            <button>Register</button>
+          </Link>
         </div>
       </div>
 
       <div className="App-header">
-          <h1>Login page</h1>
-          <Link to="/Register">Don't have an account?</Link>
-          <form onSubmit={Log}>
-            <div>
-              <label htmlFor="Email">Email:</label>
-              <input
-                type="text"
-                id="Email"
-                value={email}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <p>{ErrMSG}</p>
-            <Link to="/forgot-password">Forgot Password?</Link>
-            <button type="submit">Login</button>
-          </form>
-          {/* Add a link to a "Forgot Password" page if needed */}
-          
-        </div>
+        <h1>Login page</h1>
+        <Link to="/Register">Don't have an account?</Link>
+        <form onSubmit={handleLogin}>
+          <div>
+            <label htmlFor="Email">Email:</label>
+            <input
+              type="text"
+              id="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <p>{errMsg}</p>
+          <Link to="/ForgotPassword">Forgot Password?</Link>
+          <button type="submit">Login</button>
+        </form>
       </div>
+    </div>
+  );
+}
 
-    
-      
-    );
-  }
-
-  export default Login;
+export default Login;

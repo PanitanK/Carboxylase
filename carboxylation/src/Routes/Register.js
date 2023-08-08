@@ -59,6 +59,19 @@ function Register() {
           <img src={Title} alt="Title" /> 
         </a>
       </div>
+
+      <div className="right-content">
+        
+        <Link to="/Login">
+          <button>Login</button>
+        </Link>
+
+        <Link to="/Register">
+          <button>Register</button>
+        </Link>
+
+      </div>
+      
     </div>
 
      <div className="App-header">

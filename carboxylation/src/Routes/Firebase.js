@@ -8,6 +8,8 @@ const firebaseConfig = {
   projectId: "carboxylation-9d578",
   storageBucket: "carboxylation-9d578.appspot.com",
   messagingSenderId: "84041114659",
+
+  
   appId: "1:84041114659:web:545808d16ad54334ca7d96",
   measurementId: "G-8PH3RZYWE3"
 };

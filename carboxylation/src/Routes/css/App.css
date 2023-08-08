@@ -30,7 +30,25 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
+
+ 
 }
+
+.Contact {
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+}
+
+.Contact p {
+  margin: 0 0.5em 0 0; /* Apply a margin of 2em to the right side */
+}
+
+.Contact .mail  {
+  color: rgb(134, 233, 233);
+}
+
 
 .App-link {
   color: #61dafb;
@@ -81,3 +99,4 @@
 .right-content button {
   margin-left: 10px;
 }
+

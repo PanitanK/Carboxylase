@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
 import './css/App.css';
-import { app } from "./Firebase";
 
 
 
-function App() {
+function Forgot_password() {
 
   return (
     <div className="App">
@@ -30,11 +29,17 @@ function App() {
       </div>
 
       <header className="App-header">
-        <p>Main Page</p>
+        
+      <div className="Contact">
+        <p>Please contact </p>
+        <p className="mail">panitan.kwan@bumail.net </p>
+        <p>For Furthur Assistance</p>
+      </div>
       </header>
+      
 
     </div>
   );
 }
 
-export default App;
+export default Forgot_password;
