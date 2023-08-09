@@ -25,8 +25,9 @@ function Forgot_password() {
           <button>Register</button>
         </Link>
 
-        </div>
       </div>
+      
+    </div>
 
       <header className="App-header">
         

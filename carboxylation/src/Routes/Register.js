@@ -5,9 +5,9 @@ import Title from './image/logo/CBX_Transparent.png';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { auth } from './Firebase';
+import { auth,db } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+import {  collection, addDoc, doc, setDoc } from 'firebase/firestore';
 
 
 
@@ -17,8 +17,25 @@ function Register() {
   const [password, regPassword] = useState('');
   const [ErrMSG, setErrMsg] = useState(null);
   const navigate = useNavigate();
-  //const des = collection(firebase,"USERS")
-
+  const createUserDocumentAndSubcollections = async (userId, dataCollection, profileData) => {
+    try {
+      // Create user document using UID
+      const userDocRef = doc(db, 'USERS', userId);
+      await setDoc(userDocRef, {});
+  
+      // Create DataCollection subcollection
+      const dataCollectionRef = collection(db, 'USERS', userId, 'DataCollection');
+      await addDoc(dataCollectionRef, dataCollection);
+      console.log('DataCollection document created');
+  
+      // Create ProfileCollection subcollection
+      const profileCollectionRef = collection(db, 'USERS', userId, 'ProfileCollection');
+      await addDoc(profileCollectionRef, profileData);
+      console.log('ProfileCollection document created');
+    } catch (error) {
+      console.error('Error creating user document and subcollections: ', error);
+    }
+  };
   const Reg = async (event) => {
     event.preventDefault();
     console.log('Submitted username:', email);
@@ -31,8 +48,23 @@ function Register() {
 
         const user = userCredential.user;
         //console.log("New user created:", user);
+
+
+
         setErrMsg(null);
-        navigate('/login');
+
+        const dataCollection = { Credential: 'NULL' };
+        const profileData = { Name: 'NEW_USER', Hometown: 'NULL' };
+        createUserDocumentAndSubcollections(user.uid, dataCollection, profileData).then(() => {
+          console.log('Subcollection document creation successful');
+          navigate('/login');
+        })
+        .catch((error) => {
+          console.error('Subcollection document creation error: ', error);
+        });
+        
+
+        
 
       }).catch((error) => {
     // Handle any errors that occur during user creation
@@ -71,7 +103,7 @@ function Register() {
         </Link>
 
       </div>
-      
+
     </div>
 
      <div className="App-header">

@@ -23,7 +23,7 @@ function Login() {
       console.log(userCredential)
       console.log(_user.uid)
       setErrMsg(null);
-      navigate('/Login/Home', { state: { userUID: _user.uid } });
+      navigate('/Protected', { state: { userUID: _user.uid } });
 
     } catch (error) {
       const errorCode = error.code;

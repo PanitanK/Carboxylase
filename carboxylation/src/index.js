@@ -16,7 +16,7 @@ import Register from './Routes/Register';
 import Home from './Routes/Home';
 import Protected from './Routes/Protected';
 import ForgotPassword from './Routes/ForgotPassword';
-import { AuthProvider } from './Routes/Auth';
+
 
 const router = createBrowserRouter([
   {
@@ -28,19 +28,6 @@ const router = createBrowserRouter([
   {
     path: "/Login",
     element: <Login />,
-    children: [
-      {
-        path: "Home",
-        element: (
-          <Protected
-            isSignedIn={true}
-            path="/Home"
-            // Pass user UID as a prop
-            element={<Home />}
-          />
-        ),
-      },
-    ],
   },
 
   {
@@ -52,7 +39,16 @@ const router = createBrowserRouter([
     path: "/ForgotPassword",
     element: <ForgotPassword/>,
   },
-  
+
+  {
+    path: "/Protected",
+    element: <Protected/>,
+  },
+
+  {
+    path: "/Home",
+    element:<Home/> 
+  }
 
 
 ]);

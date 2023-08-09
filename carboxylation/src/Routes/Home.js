@@ -22,7 +22,7 @@ function Home() {
 
   else  {
     return (
-      <div className="App">
+    <div className="App">
       <div className="static-bar">
         <div className="left-content">
           <a href="/">
@@ -39,7 +39,7 @@ function Home() {
             
       
       </div>
-      </div>
+    </div>
 
       
     );

@@ -1,23 +1,26 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate,useLocation } from 'react-router-dom';
 
-function Protected({ isSignedIn, userUID, children }) {
-  
-  if (!isSignedIn) {
-    // Redirect logic if user is not signed in
-    return <Navigate to="/Login" />;
-  }
+function Protected({ children }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userUID = location.state.userUID;
 
-  // Check if userUID matches the allowed UID (replace with your logic)
-  
+  useEffect(() => {
+    if (userUID == null) {
+      navigate('/Login');
+    } else {
+      navigate('/Home', { state: { userUID } });
+    }
+  }, [navigate, userUID]);
 
+  // Render the children only if the user is signed in
   if (userUID != null) {
-    // Redirect if user UID is not allowed
-    return <Navigate to="/Login" />;
+    return <>{children}</>;
   }
 
-  // User is signed in and has the allowed UID, render the children
-  return children;
+  // User is not signed in, already navigated
+  return null;
 }
 
 export default Protected;
