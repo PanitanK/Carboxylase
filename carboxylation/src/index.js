@@ -16,7 +16,7 @@ import Register from './Routes/Register';
 import Home from './Routes/Home';
 import Protected from './Routes/Protected';
 import ForgotPassword from './Routes/ForgotPassword';
-
+import Setting from './Routes/Setting';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +47,14 @@ const router = createBrowserRouter([
 
   {
     path: "/Home",
-    element:<Home/> 
+    element:<Home/>,
+    children: [
+      {
+        path: 'Setting', // Relative path to the parent's path
+        element: <Setting />,
+      },
+    ],
+
   }
 
 

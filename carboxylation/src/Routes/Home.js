@@ -1,8 +1,10 @@
 import Title from './image/logo/CBX_Transparent.png';
+import Gear from './image/logo/gear.png';
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate , Outlet} from 'react-router-dom';
 import { db } from './Firebase';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import Setting from './Setting'; // Import your Setting component
 
 function Home() {
   const location = useLocation();
@@ -11,6 +13,16 @@ function Home() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [HasFetched, setFetch] = useState(false);
+  const [showSetting, setShowSetting] = useState(false); // State to track whether to show Setting component
+
+  const handleGearClick = () => {
+    setShowSetting((prevShowSetting) => !prevShowSetting); // Toggle showSetting state
+    if (!showSetting) {
+      navigate('/Home/Setting', { state: { userData } });
+    } else {
+      navigate('/Home', { state: { userData } });
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +54,7 @@ function Home() {
 
   if (location.state == null) {
     console.log("USER IS NOT RECOGNIZED");
-    navigate('/');
+  
     return (
       <div className="App-header">
         <h1>UNAUTHORIZED ACCESS</h1>
@@ -50,7 +62,7 @@ function Home() {
       </div>
     );
   } else if (!userData) {
-    return <div>Loading...</div>;
+    return <div className="App-header">Loading...</div>;
   } else {
     console.log(userData); // Log the entire userData for debugging purposes
 
@@ -62,23 +74,32 @@ function Home() {
               <img src={Title} alt="Title" />
             </a>
           </div>
-
           <div className="right-content">
             {userData && userData.length > 0 ? (
               <h2>USER : {userData[0].Name}</h2>
             ) : (
               <h2>User data not available</h2>
             )}
+            <div className="gear-link" onClick={handleGearClick}>
+              <img src={Gear} alt="Gear" className="gear" />
+            </div>
           </div>
         </div>
 
         <div className="App-header">
-          <h1>Welcome to your homepage!</h1>
-          <p>Your Home town is {userData[0].Hometown}</p>
-        </div>
+        {showSetting ? (
+          <Outlet /> // Show outlet content when showSetting is true
+        ) : (
+          <div>
+            <h1>Welcome to your homepage!</h1>
+            <p>Your Home town is {userData && userData[0].Hometown}</p>
+          </div>
+        )}
       </div>
+    </div>
     );
   }
 }
 
 export default Home;
+
