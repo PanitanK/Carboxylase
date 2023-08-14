@@ -50,7 +50,7 @@ const router = createBrowserRouter([
     element:<Home/>,
     children: [
       {
-        path: 'Setting', // Relative path to the parent's path
+        path: 'Setting', 
         element: <Setting />,
       },
     ],

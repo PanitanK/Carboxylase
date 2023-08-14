@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  /*background-color: #282c34;*/
+
   background-image: linear-gradient(rgba(255, 255, 255, 0.98), rgba(0, 0, 0, 0.97)) , url('../image/logo/4.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
 
-  /* USE IMAGE AS BACKGROUND*/
+
 
 
   display: flex;
@@ -42,7 +42,7 @@
 }
 
 .Contact p {
-  margin: 0 0.5em 0 0; /* Apply a margin of 2em to the right side */
+  margin: 0 0.5em 0 0; 
 }
 
 .Contact .mail  {
@@ -67,20 +67,20 @@
   align-items: center;
 }
 
-/* Adjust the flex-basis for left-content and right-content */
+
 .left-content {
-  flex-basis: 10%; /* Initial size is 25% */
+  flex-basis: 10%; 
 }
 
 .right-content {
-  flex-basis: 85%; /* Initial size is 70% */
+  flex-basis: 85%; 
 }
 
 .gear-link {
   display: flex;
   align-items: center;
   
-  margin-left: 20px; /* Add margin to create space to the left */
+  margin-left: 20px; 
 }
 
 .gear {
@@ -106,13 +106,13 @@
 }
 
 
-/* Add styles to the left content */
+
 .left-content img {
   width: 80px;
   height: 32px;
 }
 
-/* Add styles to the right content */
+
 .right-content {
   display: flex;
   justify-content: flex-end;

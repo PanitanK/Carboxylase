@@ -1,22 +1,41 @@
 import './css/App.css';
 //import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
-
+import placeholderImage from './image/logo/Placeholder.png';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { auth,db } from './Firebase';
+import { auth , db ,storage } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {  collection, addDoc, doc, setDoc } from 'firebase/firestore';
-
+import {  ref , uploadBytes} from 'firebase/storage';
 
 
 function Register() {
 
+ 
   const [email, regEmail] = useState('');
   const [password, regPassword] = useState('');
   const [ErrMSG, setErrMsg] = useState(null);
   const navigate = useNavigate();
+
+  const createUserFolder = async (userId) => {
+    try {
+      // Create a user-specific folder using the user's UID
+      const userFolderRef = ref(storage,  userId + '/');
+      uploadBytes(userFolderRef , placeholderImage  ).then(()=>{
+        console.log("Uploaded")
+
+      })
+
+  
+     
+
+    } catch (error) {
+      console.error('Error creating user folder: ', error);
+    }
+  };
+
   const createUserDocumentAndSubcollections = async (userId, dataCollection, profileData) => {
     try {
       // Create user document using UID
@@ -36,47 +55,34 @@ function Register() {
       console.error('Error creating user document and subcollections: ', error);
     }
   };
+
   const Reg = async (event) => {
     event.preventDefault();
     console.log('Submitted username:', email);
     console.log('Submitted password:', password);
 
-
     try {
-      createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
-        // The user has been successfully created. You can access the user data as follows:
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      setErrMsg(null);
 
-        const user = userCredential.user;
-        //console.log("New user created:", user);
+      const dataCollection = { Credential: 'NULL' };
+      const profileData = { Name: 'NEW_USER', Hometown: 'NULL' };
 
+      // Create user document and storage folder simultaneously
+      await Promise.all([
+        createUserDocumentAndSubcollections(user.uid, dataCollection, profileData),
+        createUserFolder(user.uid)
+      ]);
 
-
-        setErrMsg(null);
-
-        const dataCollection = { Credential: 'NULL' };
-        const profileData = { Name: 'NEW_USER', Hometown: 'NULL' };
-        createUserDocumentAndSubcollections(user.uid, dataCollection, profileData).then(() => {
-          console.log('Subcollection document creation successful');
-          navigate('/login');
-        })
-        .catch((error) => {
-          console.error('Subcollection document creation error: ', error);
-        });
-        
-
-        
-
-      }).catch((error) => {
-    // Handle any errors that occur during user creation
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setErrMsg(errorCode + "  " + errorMessage);
-    
-    // You can display the error message to the user or perform other error handling tasks.
-  });
-     
+      console.log('Both Firebase and Storage operations are successful');
+      navigate('/login');
     } catch (error) {
-      console.error("Error creating user:");
+      // Handle any errors that occur during user creation
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrMsg(errorCode + "  " + errorMessage);
+      // You can display the error message to the user or perform other error handling tasks.
     }
   };
 
