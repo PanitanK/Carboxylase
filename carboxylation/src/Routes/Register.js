@@ -45,21 +45,21 @@ function Register() {
       // Create DataCollection subcollection
       const dataCollectionRef = collection(db, 'USERS', userId, 'DataCollection');
       await addDoc(dataCollectionRef, dataCollection);
-      console.log('DataCollection document created');
+      //console.log('DataCollection document created');
   
       // Create ProfileCollection subcollection
       const profileCollectionRef = collection(db, 'USERS', userId, 'ProfileCollection');
       await addDoc(profileCollectionRef, profileData);
-      console.log('ProfileCollection document created');
+      //console.log('ProfileCollection document created');
     } catch (error) {
-      console.error('Error creating user document and subcollections: ', error);
+      //console.error('Error creating user document and subcollections: ', error);
     }
   };
 
   const Reg = async (event) => {
     event.preventDefault();
-    console.log('Submitted username:', email);
-    console.log('Submitted password:', password);
+    //console.log('Submitted username:', email);
+    //console.log('Submitted password:', password);
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -67,7 +67,7 @@ function Register() {
       setErrMsg(null);
 
       const dataCollection = { Credential: 'NULL' };
-      const profileData = { Name: 'NEW_USER', Hometown: 'NULL' };
+      const profileData = { Name: 'NEW_USER', FirstName:'NULL' , LastName:'NULL' , Hometown: 'NULL' , Latitude : 8.435164926  , Longitude : 99.957829502 };
 
       // Create user document and storage folder simultaneously
       await Promise.all([
@@ -75,7 +75,7 @@ function Register() {
         createUserFolder(user.uid)
       ]);
 
-      console.log('Both Firebase and Storage operations are successful');
+      //console.log('Both Firebase and Storage operations are successful');
       navigate('/login');
     } catch (error) {
       // Handle any errors that occur during user creation

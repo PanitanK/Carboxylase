@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
 import './css/App.css';
-import { app } from "./Firebase";
 
 
 

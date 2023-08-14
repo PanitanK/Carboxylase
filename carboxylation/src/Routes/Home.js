@@ -16,7 +16,11 @@ function Home() {
   const [HasFetched, setFetch] = useState(false);
   const [showSetting, setShowSetting] = useState(false); // State to track whether to show Setting component
 
-  const handleGearClick = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+
+
+
+  /*const handleGearClick = () => {
     setFetch(false)
     setShowSetting((prevShowSetting) => !prevShowSetting); // Toggle showSetting state
     if (!showSetting) {
@@ -24,7 +28,14 @@ function Home() {
     } else {
       navigate('/Home', { state: { userUID } });
     }
+  };*/
+
+  
+
+  const handleGearClick = () => {
+    setShowDropdown(!showDropdown);
   };
+
 
   const handleDataUpdate = () => {
     setFetch(false); // This will trigger a re-fetch in the useEffect of Home
@@ -50,14 +61,14 @@ function Home() {
       }
     };
 
-    console.log("ABOUT TO FETCH");
+    //console.log("ABOUT TO FETCH");
     if (!HasFetched){
-      //console.log("FETCH COUNT : " , fetchcount)
+      //console.log("FETCHING " )
       fetchData();
       setFetch(true)
     
     }
-    console.log("FETCHED");
+    //console.log("FETCHED");
   }, [userUID, userCollectionRef, HasFetched]); 
 
   if (location.state == null) {
@@ -78,9 +89,17 @@ function Home() {
       <div className="App">
         <div className="static-bar">
           <div className="left-content">
-            <a href="/">
-              <img src={Title} alt="Title" />
-            </a>
+  
+          <img
+            src={Title}
+            alt="Title"
+            onClick={() => {
+              navigate('/Home', { state: { userUID } });
+              setShowSetting(false);
+            }}
+            style={{ cursor: 'pointer' }} // Add cursor style here
+          />
+
           </div>
           <div className="right-content">
             {userData && userData.length > 0 ? (
@@ -88,15 +107,47 @@ function Home() {
             ) : (
               <h2>User data not available</h2>
             )}
+          
+
             <div className="gear-link" onClick={handleGearClick}>
               <img src={Gear} alt="Gear" className="gear" />
+              {showDropdown && (
+                <div className="dropdown">
+                  <button onClick={() => {
+                    navigate('/Home', { state: { userUID } })
+                    setShowSetting(false); }
+                  }>
+                    Home
+                  </button>
+                  <button onClick={() => navigate('/Home/Profile', { state: { userUID } })}>
+                    Profile
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowSetting(true); // Change the state here
+                      navigate('/Home/Setting', { state: { userUID } });
+                    }}
+                  >
+                    Setting
+                  </button>
+
+                  <button onClick={() => navigate("/")}>
+                    Logout  
+                  </button>
+
+                </div>
+              )}
             </div>
+
+
+
+
           </div>
         </div>
 
         <div className="App-header">
         {showSetting ? (
-          <Setting userUID={userUID} onDataUpdate={handleDataUpdate} /> // Pass the userUID to the Setting component
+          <Setting userUID={userUID} onDataUpdate={handleDataUpdate} /> 
         ) : (
           <div>
             <h1>Welcome to your homepage!</h1>

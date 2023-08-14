@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './Firebase';
 import { collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
+import Gmap from './Gmap';
 
 function Setting({ userUID, onDataUpdate }) {
     const [HasFetched, setFetch] = useState(false);
@@ -8,6 +9,7 @@ function Setting({ userUID, onDataUpdate }) {
     const userCollectionRef = collection(db, 'USERS');
     const [inputValues, setInputValues] = useState({}); // State for input values
     const [ErrorMSG, setErrorMSG] = useState(''); // State for input values
+    const desiredOrder = ['Name', 'FirstName', 'LastName' , 'Hometown' , 'Latitude' , 'Longitude'];
 
     const handleSubmit = async () => {
         console.log(inputValues)
@@ -99,18 +101,24 @@ function Setting({ userUID, onDataUpdate }) {
     return (
         <div className="setting-container">
             <h1>Edit User Settings</h1>
-            {Object.keys(userData[0]).map(key => (
-                <div key={key}>
-                    <label>{key}:</label>
+            {desiredOrder.map(key => (
+            <div key={key}>
+                <label>{key}:</label>
                     <input
                         type="text"
                         value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
                         onChange={e => handleInputChange(key, e.target.value)}
                     />
-                </div>
+            </div>
             ))}
+            <div>
+                <h1>Pin Your Plot Proximity</h1>
+                <Gmap />
+            </div>
+
             <button onClick={handleSubmit}>Save Changes</button>
             <p>{ErrorMSG}</p>
+            
         </div>
     );
 }
