@@ -17,14 +17,17 @@ import Home from './Routes/Home';
 import Protected from './Routes/Protected';
 import ForgotPassword from './Routes/ForgotPassword';
 import Setting from './Routes/Setting';
-
+import Plotregister from './Routes/Plotregister'
 const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <Err />,
     element:  <App/>,
   },
-
+  {
+    path: "/Plotregister",
+    element:  <Plotregister/>,
+  },
   {
     path: "/Login",
     element: <Login />,

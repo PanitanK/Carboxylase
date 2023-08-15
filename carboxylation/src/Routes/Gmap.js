@@ -1,4 +1,3 @@
-// Gmap.js
 import React, { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useJsApiLoader } from '@react-google-maps/api';
@@ -12,8 +11,8 @@ const Gmap = ({ initialCenter, onLocationUpdate }) => {
 
   const [center, setCenter] = useState(initialCenter);
   const [markerPosition, setMarkerPosition] = useState(null);
-  const [inputLat, setInputLat] = useState('');
-  const [inputLng, setInputLng] = useState('');
+  const [inputLat, setInputLat] = useState(initialCenter.lat);
+  const [inputLng, setInputLng] = useState(initialCenter.lng);
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -46,7 +45,7 @@ const Gmap = ({ initialCenter, onLocationUpdate }) => {
   return (
     isLoaded && (
       <div>
-        <p>Click on the map to input a location or type in coordinate in the box below</p>
+        <p>Click on the map to input a location or type in the coordinate in the box below</p>
         <div>
           <input
             type="text"
@@ -54,6 +53,7 @@ const Gmap = ({ initialCenter, onLocationUpdate }) => {
             value={inputLat}
             onChange={(e) => setInputLat(e.target.value)}
           />
+          
           <input
             type="text"
             placeholder="Longitude"

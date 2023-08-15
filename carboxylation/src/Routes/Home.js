@@ -170,18 +170,21 @@ function Home() {
                   
                 </div>
               
-              
+                <div>
+                  <span className="info-label">Issued Date:</span>
+                  <span className="info-value">{userData[0].Created_Date}</span>
+                </div>
                 <div>
                   <span className="info-label">Expiration Date:</span>
-                  <span className="info-value">5/5/2025</span>
+                  <span className="info-value">{userData[0].Expiry_Date}</span>
                 </div>
                 <div>
                   <span className="info-label">Province of Issued :</span>
                   <span className="info-value">{userData[0].Hometown}</span>
                 </div>
                 <div>
-                  <span className="info-label">Credit owned :</span>
-                  <span className="info-value">152</span>
+                  <span className="info-label">Credit owned : </span>
+                  <span className="Credit-own">{userData[0].Credit_Own}</span>
                   <span className="info-label"> Credits</span>
                 </div>
 

@@ -155,8 +155,11 @@
 }
 
 .setting-container {
-  outline: 2px solid black; /* Thin outline for the big container */
+  
   color: black;
+  padding: 2%;
+  margin-top: 2%;
+  background-color: #cacaca0c;
 }
 
 .pin-plot-container {
@@ -172,6 +175,7 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 20px; /* Spacing from the previous content */
+ 
 }
 
 
@@ -192,9 +196,7 @@
   
 }
 
-.Location-Map {
-  padding: 0%;
-}
+
 
 
 .small-container {
@@ -339,4 +341,9 @@
 
 .Map-Box{
   padding: 10%;
+}
+
+.Credit-own{
+  color: #319540;
+  font-weight: bold;
 }

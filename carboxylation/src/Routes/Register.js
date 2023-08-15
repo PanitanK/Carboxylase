@@ -17,6 +17,8 @@ function Register() {
   const [email, regEmail] = useState('');
   const [password, regPassword] = useState('');
   const [ErrMSG, setErrMsg] = useState(null);
+  const [Firstname,regFirstName] = useState('');
+  const [Lastname,regLastName] = useState('');
   const navigate = useNavigate();
 
   const createUserFolder = async (userId) => {
@@ -65,9 +67,28 @@ function Register() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       setErrMsg(null);
+      const currentDate = new Date();
+
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed, so we add 1
+      const year = currentDate.getFullYear();
+
+      
 
       const dataCollection = { Credential: 'NULL' };
-      const profileData = { Name: 'NEW_USER', FirstName:'NULL' , LastName:'NULL' , Hometown: 'NULL' , Latitude : 8.435164926  , Longitude : 99.957829502 };
+      const profileData = { 
+        Name: Firstname + " " + Lastname,
+        FirstName:Firstname , 
+        LastName:Lastname , 
+        Hometown: 'NULL' , 
+        Latitude : 8.435164926  , 
+        Longitude : 99.95782950 , 
+        Credit_Own : 0 ,
+        Created_Date : `${day}/${month}/${year}`,
+        Expiry_Date : `${day}/${month}/${year+1}`
+
+      
+      };
 
       // Create user document and storage folder simultaneously
       await Promise.all([
@@ -116,6 +137,27 @@ function Register() {
         <h1>Register</h1>
         
         <form onSubmit={Reg}>
+          
+          <div>
+            <label htmlFor="First_Name">Firstname:</label>
+            <input
+              type="text"
+              id="Firstname"
+              value={Firstname}
+              onChange={(e) => regFirstName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="Last_Name">Lastname:</label>
+            <input
+              type="text"
+              id="Lastname"
+              value={Lastname}
+              onChange={(e) => regLastName(e.target.value)}
+              required
+            />
+          </div>
           <div>
             <label htmlFor="Email">Email:</label>
             <input

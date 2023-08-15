@@ -116,24 +116,26 @@ function Setting({ userUID, onDataUpdate }) {
         <div className="setting-container">
           
             <div className="text-input">
-              <h1>Edit User Settings</h1>
+              <h1>Default User Settings</h1>
               {desiredOrder.map((key) => (
-                <span>
-                <div key={key}>
-                  <label>{key} : </label>
+                
+                
+                  <span>
+                  <label> {key} : </label>
                   <input
                     type="text"
                     value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
                     onChange={(e) => handleInputChange(key, e.target.value)}
                   />
-                </div>
-                </span>
+                  </span>
+                
+                
               ))}
-                <div className="gmap-container">
+              <div className="gmap-container">
                 <div className='Location-Map'>
                   <Gmap initialCenter={initialCenter} onLocationUpdate={handleLocationUpdate} />
                 </div>
-            </div>
+              </div>
             
             
           </div>

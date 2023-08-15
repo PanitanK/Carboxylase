@@ -1,35 +1,43 @@
-import React from "react";
-import { GoogleMap, Polygon, LoadScript } from "@react-google-maps/api";
+import React, { useEffect, useState } from 'react';
+import { GoogleMap, LoadScript, Polygon } from '@react-google-maps/api';
+import * as turf from '@turf/turf';
 
-const containerStyle = {
-  width: "100%",
-  height: "400px",
-};
+function Plotmap({ coordinates }) {
+  const [area, setArea] = useState(0);
 
-const center = {
-  lat: 0, // Provide the center latitude
-  lng: 0, // Provide the center longitude
-};
+  useEffect(() => {
+    if (coordinates.length >= 3) {
+      const turfPolygon = turf.polygon([coordinates]);
+      const calculatedArea = turf.area(turfPolygon);
+      setArea(calculatedArea);
+    } else {
+      setArea(0);
+    }
+  }, [coordinates]);
 
-const PolygonMap = ({ coordinates }) => {
   return (
-    <LoadScript googleMapsApiKey="AIzaSyAS-9FhEUM8F00Bhhb6RwaI3DmEX4dMApU"> {/* Replace with your API key */}
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
-        {coordinates && coordinates.length > 0 && (
-          <Polygon
-            path={coordinates}
+    <div>
+      <LoadScript googleMapsApiKey="AIzaSyAS-9FhEUM8F00Bhhb6RwaI3DmEX4dMApU">
+        <GoogleMap
+          center={coordinates[0]}
+          zoom={12}
+          mapContainerStyle={{ height: '100px', width: '100%' }}
+        >
+            <Polygon
+            paths={coordinates}
             options={{
-              fillColor: "yellow",
-              fillOpacity: 0.4,
-              strokeColor: "#d35400",
-              strokeOpacity: 0.8,
-              strokeWeight: 3,
+                strokeColor: '#FF0000',    // Red stroke color
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',      // Red fill color
+                fillOpacity: 0.35,
             }}
-          />
-        )}
-      </GoogleMap>
-    </LoadScript>
+            />
+        </GoogleMap>
+      </LoadScript>
+      <p>Area within the polygon: {area.toFixed(2)} square meters</p>
+    </div>
   );
-};
+}
 
-export default PolygonMap;
+export default Plotmap;

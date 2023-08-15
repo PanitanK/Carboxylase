@@ -4,7 +4,7 @@ import Gear from './image/logo/gear.png';
 import Plotmap from './Plotmap'; // Import the Plotmap component
 
 function PlotComponent({ plotData, plotIndex }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const toggleCollapse = () => {
     setCollapsed(prevCollapsed => !prevCollapsed);
@@ -36,7 +36,7 @@ function PlotComponent({ plotData, plotIndex }) {
 
       <div className={`content ${collapsed ? "collapsed" : ""}`}>
         <div className='Map-Box'>
-          <Plotmap coordinates={plotCoordinates} />
+          <Plotmap className = "Location-Map" coordinates={plotCoordinates} />
         </div>
         <p>Plot Area : sqkm</p>
         <p>Estimate Carbon Absorption {plotData.carbonAbsorption} kg</p>
