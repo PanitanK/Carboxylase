@@ -116,7 +116,7 @@ function Setting({ userUID, onDataUpdate }) {
         <div className="setting-container">
           
             <div className="text-input">
-              <h1>Default User Settings</h1>
+            <div className="primary-header1"><h1>Default User Settings</h1></div>
               {desiredOrder.map((key) => (
                 
                 
@@ -140,7 +140,7 @@ function Setting({ userUID, onDataUpdate }) {
             
           </div>
       
-          <button onClick={handleSubmit}>Save Changes</button>
+          <button onClick={handleSubmit}class="submit-button">Save Changes</button>
           <p>{ErrorMSG}</p>
         </div>
       );

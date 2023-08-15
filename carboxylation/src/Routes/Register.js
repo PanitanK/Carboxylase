@@ -122,11 +122,11 @@ function Register() {
       <div className="right-content">
         
         <Link to="/Login">
-          <button>Login</button>
+          <button class="btn1">Login</button>
         </Link>
 
         <Link to="/Register">
-          <button>Register</button>
+        <button class="btn2">Register</button>
         </Link>
 
       </div>
@@ -134,12 +134,14 @@ function Register() {
     </div>
 
      <div className="App-header">
-        <h1>Register</h1>
+      <div className="centering-wrapper">
+        <div className="section1 text-center">
+          <div className="primary-header"><h1>Register</h1></div>        
         
         <form onSubmit={Reg}>
           
           <div>
-            <label htmlFor="First_Name">Firstname:</label>
+            <label htmlFor="First_Name"class="label">Firstname:</label>
             <input
               type="text"
               id="Firstname"
@@ -149,7 +151,7 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="Last_Name">Lastname:</label>
+            <label htmlFor="Last_Name" class="label">Lastname:</label>
             <input
               type="text"
               id="Lastname"
@@ -159,7 +161,7 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="Email">Email:</label>
+            <label htmlFor="Email"class="label">Email:</label>
             <input
               type="text"
               id="username"
@@ -169,7 +171,7 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="Password">Password:</label>
+            <label htmlFor="Password"class="label">Password:</label>
             <input
               type="password"
               id="password"
@@ -178,12 +180,18 @@ function Register() {
               required
             />
           </div>
-          <Link to="/Login">Already a user ?</Link>
+          <Link to="/Login" class="link">Already a user ?</Link>
           <p>{ErrMSG}</p>
-          <button type="submit">ENTER</button>
+          <div>
+          <button type="submit" class="submit-button">ENTER</button>
+          </div>
+          
           
         </form>
+        
       </div>
+    </div>
+    </div>
     </div>
 
   

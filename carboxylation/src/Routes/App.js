@@ -18,11 +18,11 @@ function App() {
       <div className="right-content">
         
         <Link to="/Login">
-          <button>Login</button>
+          <button class="btn1">Login</button>
         </Link>
 
         <Link to="/Register">
-          <button>Register</button>
+          <button class="btn2">Register</button>
         </Link>
 
         </div>
