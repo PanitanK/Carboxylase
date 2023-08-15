@@ -11,6 +11,16 @@ function Setting({ userUID, onDataUpdate }) {
     const [ErrorMSG, setErrorMSG] = useState(''); // State for input values
     const desiredOrder = ['Name', 'FirstName', 'LastName' , 'Hometown' , 'Latitude' , 'Longitude'];
 
+    
+
+    const handleLocationUpdate = (newLocation) => {
+        setInputValues((prevInputValues) => ({
+          ...prevInputValues,
+          Latitude: newLocation.lat,
+          Longitude: newLocation.lng,
+        }));
+      };
+
     const handleSubmit = async () => {
         console.log(inputValues)
         setErrorMSG("")
@@ -97,30 +107,37 @@ function Setting({ userUID, onDataUpdate }) {
         return <h1>THIS IS UID : {userUID}</h1>;
     }
 
+    const initialCenter = {
+        lat: parseFloat(userData[0]?.Latitude || 0), // Default to 0 if not available
+        lng: parseFloat(userData[0]?.Longitude || 0), // Default to 0 if not available
+      };
     // Render the editable fields using input boxes
     return (
         <div className="setting-container">
-            <h1>Edit User Settings</h1>
-            {desiredOrder.map(key => (
-            <div key={key}>
-                <label>{key}:</label>
-                    <input
-                        type="text"
-                        value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
-                        onChange={e => handleInputChange(key, e.target.value)}
-                    />
+          <div className="flex-container">
+            <div className="text-input">
+              <h1>Edit User Settings</h1>
+              {desiredOrder.map((key) => (
+                <div key={key}>
+                  <label>{key}:</label>
+                  <input
+                    type="text"
+                    value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
+                    onChange={(e) => handleInputChange(key, e.target.value)}
+                  />
+                </div>
+              ))}
             </div>
-            ))}
-            <div>
-                <h1>Pin Your Plot Proximity</h1>
-                <Gmap />
+            <div className="gmap-container">
+              <h3>Pin your plot location</h3>
+              <Gmap initialCenter={initialCenter} onLocationUpdate={handleLocationUpdate} />
             </div>
-
-            <button onClick={handleSubmit}>Save Changes</button>
-            <p>{ErrorMSG}</p>
-            
+          </div>
+      
+          <button onClick={handleSubmit}>Save Changes</button>
+          <p>{ErrorMSG}</p>
         </div>
-    );
-}
+      );
+    }
 
 export default Setting;
