@@ -174,18 +174,13 @@
   margin-top: 20px; /* Spacing from the previous content */
 }
 
-.gmap-container {
-  width: 60%; /* Adjust as needed */
-}
 
 .text-input {
-  width: 50%; /* Adjust as needed */
+  width: 100%; /* Adjust as needed */
   margin-right: 10px;
 }
 
-.gmap-container {
-  width: 50%; /* Adjust as needed */
-}
+
 
 .big-container {
   outline: 2px solid black; /* Thin outline for the big container */
@@ -197,6 +192,9 @@
   
 }
 
+.Location-Map {
+  padding: 0%;
+}
 
 
 .small-container {
@@ -283,7 +281,7 @@
   width: 100%;
   height: 80%;
   border-radius: 20px;
-  background-color: #ffffff00;
+  background-color: rgb(248, 247, 245);
   font-family: Arial, sans-serif;
   display: flex;
   align-items: center;
@@ -337,4 +335,8 @@
   padding: 10px 20px; /* Add padding for better appearance */
   border: none; /* Remove default button border */
   cursor: pointer; /* Change cursor on hover */
+}
+
+.Map-Box{
+  padding: 10%;
 }

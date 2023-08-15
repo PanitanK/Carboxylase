@@ -1,13 +1,13 @@
 import Title from './image/logo/CBX_Transparent.png';
 import Gear from './image/logo/gear.png';
-import ToggleArrow from './image/svg/Dasharrow.svg'
+
 import Placeholder from './image/logo/Placeholder.png'
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './Firebase';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import Setting from './Setting'; // Import the Setting component
-
+import PlotComponent from './PlotComponent';
 
 function Home() {
   //var fetchcount = 0;
@@ -21,16 +21,11 @@ function Home() {
 
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const [collapseState, setCollapseState] = useState({
-    container1: true,
-    // Add more containers if needed
-  });
-  const toggleCollapse = (containerName) => {
-    setCollapseState((prevState) => ({
-      ...prevState,
-      [containerName]: !prevState[containerName],
-    }));
-  };
+  const plotDataObjects = [
+    { carbonAbsorption: 50, expectedCarbonCredit: 0.05 },
+    // Add more plot data objects as needed
+  ];
+  
   
 
 
@@ -160,54 +155,55 @@ function Home() {
             <h1>Welcome to your homepage!</h1>
             <p>Your Home town is {userData && userData[0].Hometown}</p>
 
-            <div class="credential-box">
-              <img class="image" src={Placeholder} alt="Placeholder"></img>
-              <div class="info-container">
-                <div class="header">Credential Info</div>
+            <div className="credential-box">
+              <img className="image" src={Placeholder} alt="Placeholder"></img>
+              <div className="info-container">
+                <div className="header">Credential Info</div>
                 <div>
-                  <span class="info-label">Firstname :</span>
-                  <span class="info-value">{userData[0].FirstName + " " + userData[0].LastName}</span>
+                  <span className="info-label">Firstname :</span>
+                  <span className="info-value">{userData[0].FirstName}</span>
+                  
+                </div>
+                <div>
+                  <span className="info-label">Lastname :</span>
+                  <span className="info-value">{userData[0].LastName}</span>
+                  
                 </div>
               
               
                 <div>
-                  <span class="info-label">Expiration Date:</span>
-                  <span class="info-value">5/5/2025</span>
+                  <span className="info-label">Expiration Date:</span>
+                  <span className="info-value">5/5/2025</span>
                 </div>
                 <div>
-                  <span class="info-label">Province of Issued :</span>
-                  <span class="info-value">{userData[0].Hometown}</span>
+                  <span className="info-label">Province of Issued :</span>
+                  <span className="info-value">{userData[0].Hometown}</span>
                 </div>
+                <div>
+                  <span className="info-label">Credit owned :</span>
+                  <span className="info-value">152</span>
+                  <span className="info-label"> Credits</span>
+                </div>
+
+
               </div>
             </div>
 
           <div className="big-container">
-
-            <div className="small-container">
-              <div className='Container-Header'>
-                  <div className="toggle-button">
-                    <span onClick={() => toggleCollapse("container1")}>
-                      <img
-                        className={'arrow'}
-                        src={ToggleArrow}
-                        alt="Toggle Arrow"
-                      />
-                    </span>
-                  </div>
-                <span>Plot No2</span>
-                <img src={Gear} alt="Gear" className="gear" />
-              </div>
-
-              <div className={`content ${collapseState.container1 ? "collapsed" : ""}`}>
-                <p>Carbon Absorbtion 50 kg</p>
-                <p>Expected Carbon Credit Generated 0.05 Credit</p>
-            </div>
-          </div>
+          
+          {plotDataObjects.map((plotData, index) => (
+            <PlotComponent
+              key={'525'} // Make sure to provide a unique key
+              plotData={plotData}
+              plotIndex={'525'}
+            />
+          ))}
+            
 
           <div className='AddPlot'>  
             <button className='addPlotButton'>+ Add New Plot</button>
           </div>
-          
+
         </div>
       </div>
         )}

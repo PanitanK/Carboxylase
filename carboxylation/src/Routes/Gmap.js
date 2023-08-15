@@ -63,6 +63,8 @@ const Gmap = ({ initialCenter, onLocationUpdate }) => {
           <button onClick={handleGoToCoordinates}>Go</button>
         </div>
 
+        <p></p>
+
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={15}

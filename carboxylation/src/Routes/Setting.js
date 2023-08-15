@@ -9,7 +9,7 @@ function Setting({ userUID, onDataUpdate }) {
     const userCollectionRef = collection(db, 'USERS');
     const [inputValues, setInputValues] = useState({}); // State for input values
     const [ErrorMSG, setErrorMSG] = useState(''); // State for input values
-    const desiredOrder = ['Name', 'FirstName', 'LastName' , 'Hometown' , 'Latitude' , 'Longitude'];
+    const desiredOrder = ['Name',  'Hometown' ];
 
     
 
@@ -114,24 +114,28 @@ function Setting({ userUID, onDataUpdate }) {
     // Render the editable fields using input boxes
     return (
         <div className="setting-container">
-          <div className="flex-container">
+          
             <div className="text-input">
               <h1>Edit User Settings</h1>
               {desiredOrder.map((key) => (
+                <span>
                 <div key={key}>
-                  <label>{key}:</label>
+                  <label>{key} : </label>
                   <input
                     type="text"
                     value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
                     onChange={(e) => handleInputChange(key, e.target.value)}
                   />
                 </div>
+                </span>
               ))}
+                <div className="gmap-container">
+                <div className='Location-Map'>
+                  <Gmap initialCenter={initialCenter} onLocationUpdate={handleLocationUpdate} />
+                </div>
             </div>
-            <div className="gmap-container">
-              <h3>Pin your plot location</h3>
-              <Gmap initialCenter={initialCenter} onLocationUpdate={handleLocationUpdate} />
-            </div>
+            
+            
           </div>
       
           <button onClick={handleSubmit}>Save Changes</button>
