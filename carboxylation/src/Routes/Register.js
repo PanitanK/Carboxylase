@@ -122,11 +122,11 @@ function Register() {
       <div className="right-content">
         
         <Link to="/Login">
-          <button>Login</button>
+          <button class="btn1">Login</button>
         </Link>
 
         <Link to="/Register">
-          <button>Register</button>
+        <button class="btn2">Register</button>
         </Link>
 
       </div>
@@ -134,56 +134,68 @@ function Register() {
     </div>
 
      <div className="App-header">
-        <h1>Register</h1>
+      <div className="centering-wrapper">
+        <div className="section1 text-center">
+          <div className="primary-header"><h1>Register</h1></div>        
         
         <form onSubmit={Reg}>
           
           <div>
-            <label htmlFor="First_Name">Firstname:</label>
+            <h5 htmlFor="First_Name"class="input-placeholder">Firstname</h5>
             <input
               type="text"
               id="Firstname"
+              class="form-style"
               value={Firstname}
               onChange={(e) => regFirstName(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="Last_Name">Lastname:</label>
+            <h5 htmlFor="Last_Name" class="input-placeholder">Lastname</h5>
             <input
               type="text"
               id="Lastname"
+              class="form-style"
               value={Lastname}
               onChange={(e) => regLastName(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="Email">Email:</label>
+            <h5 htmlFor="Email"class="input-placeholder">Email</h5>
             <input
               type="text"
               id="username"
+              class="form-style"
               value={email}
               onChange={(e) => regEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="Password">Password:</label>
+            <h5 htmlFor="Password"class="input-placeholder">Password</h5>
             <input
               type="password"
               id="password"
+              class="form-style"
               value={password}
               onChange={(e) => regPassword(e.target.value)}
               required
             />
           </div>
-          <Link to="/Login">Already a user ?</Link>
+          <Link to="/Login" class="link">Already a user ?</Link>
           <p>{ErrMSG}</p>
-          <button type="submit">ENTER</button>
+          <div>
+          <button type="submit" class="submit-button">ENTER</button>
+          </div>
+          
           
         </form>
+        
       </div>
+    </div>
+    </div>
     </div>
 
   

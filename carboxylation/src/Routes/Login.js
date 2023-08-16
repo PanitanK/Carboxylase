@@ -43,44 +43,53 @@ function Login() {
 
         <div className="right-content">
           <Link to="/Login">
-            <button>Login</button>
+            <button class="btn1">Login</button>
           </Link>
 
           <Link to="/Register">
-            <button>Register</button>
+            <button class="btn2">Register</button>
           </Link>
         </div>
       </div>
 
-      <div className="App-header">
-        <h1>Login page</h1>
-        <Link to="/Register">Don't have an account?</Link>
+      <div className="App-header"> 
+      <div className="centering-wrapper">
+      <div className="section1 text-center">
+      <div className="primary-header"><h1>Login page</h1></div>
+        <Link to="/Register" class="link2">Don't have an account?</Link>
         <form onSubmit={handleLogin}>
           <div>
-            <label htmlFor="Email">Email:</label>
+            <h5 htmlFor="Email" class="input-placeholder">Email</h5>
             <input
               type="text"
               id="Email"
+              class="form-style"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
+            <h5 htmlFor="password" class="input-placeholder">Password</h5>
             <input
               type="password"
               id="password"
+              class="form-style"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           <p>{errMsg}</p>
-          <Link to="/ForgotPassword">Forgot Password?</Link>
-          <button type="submit">Login</button>
+          <Link to="/ForgotPassword" class="link2">Forgot Password? </Link>          
+        <div>
+        <button type="submit"class="submit-button">Login</button>
+        </div>
         </form>
+        
       </div>
+    </div>
+    </div>
     </div>
   );
 }

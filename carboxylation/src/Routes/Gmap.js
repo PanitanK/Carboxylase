@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useJsApiLoader } from '@react-google-maps/api';
-
+import './css/App.css';
 const Gmap = ({ initialCenter, onLocationUpdate }) => {
   const mapStyles = {
     height: '400px',
@@ -45,11 +45,12 @@ const Gmap = ({ initialCenter, onLocationUpdate }) => {
   return (
     isLoaded && (
       <div>
-        <p>Click on the map to input a location or type in the coordinate in the box below</p>
+        <p class="primary-header3">Click on the map to input a location or type in the coordinate in the box below</p>
         <div>
           <input
             type="text"
             placeholder="Latitude"
+            class="form-style1"
             value={inputLat}
             onChange={(e) => setInputLat(e.target.value)}
           />
@@ -57,10 +58,11 @@ const Gmap = ({ initialCenter, onLocationUpdate }) => {
           <input
             type="text"
             placeholder="Longitude"
+            class="form-style1"
             value={inputLng}
             onChange={(e) => setInputLng(e.target.value)}
           />
-          <button onClick={handleGoToCoordinates}>Go</button>
+          <button onClick={handleGoToCoordinates} class="btn1"> Go </button>
         </div>
 
         <p></p>

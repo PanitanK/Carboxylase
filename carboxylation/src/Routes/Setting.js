@@ -116,14 +116,17 @@ function Setting({ userUID, onDataUpdate }) {
         <div className="setting-container">
           
             <div className="text-input">
-              <h1>Default User Settings</h1>
+                
+            <div className="primary-header1">Default User Settings</div>
+            
               {desiredOrder.map((key) => (
                 
                 
                   <span>
-                  <label> {key} : </label>
+                  <label class="primary-header2"> {key} : </label>
                   <input
                     type="text"
+                    class="form-style1"
                     value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
                     onChange={(e) => handleInputChange(key, e.target.value)}
                   />
@@ -140,7 +143,7 @@ function Setting({ userUID, onDataUpdate }) {
             
           </div>
       
-          <button onClick={handleSubmit}>Save Changes</button>
+          <button onClick={handleSubmit}class="submit-button">Save Changes</button>
           <p>{ErrorMSG}</p>
         </div>
       );
