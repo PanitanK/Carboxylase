@@ -159,8 +159,8 @@ function Home() {
         ) : (
 
           <div className='Home-Page'>
-            <h1>Welcome to your homepage!</h1>
-            <p>Your Hometown is {userData && userData[0].Hometown}</p>
+            <h1 class="primary-header4">Welcome to your homepage!</h1>
+            <p class="primary-header5">Your Hometown is {userData && userData[0].Hometown}</p>
             
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
@@ -199,7 +199,7 @@ function Home() {
               </div>
             </div>
 
-          <div className="big-container">
+          <div className="big-container2">
           
           {plotDocuments.map((plot, index) => (
           <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
