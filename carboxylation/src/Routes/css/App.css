@@ -388,6 +388,22 @@
 }
 .primary-header1{
   color: #000000;
+  font-size: 50px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-family:'Courier New', Courier, monospace;
+}
+.primary-header2{
+  color: #000000;
+  font-size: 30px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-family:'Courier New', Courier, monospace;
+}
+.primary-header3{
+  color: #000000;
   font-size: 20px;
   line-height: 30px; 
   font-weight: 800;
@@ -402,9 +418,9 @@
   text-align: left;
 }
 .input-placeholder{
-  color: #919296;
+  color: #ffffff;
   margin-bottom: 8px;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 16px;
   text-transform: uppercase;
@@ -412,6 +428,8 @@
   -ms-flex: 1;
   flex: 1;
   cursor: default;
+  font-family:'Courier New', Courier, monospace;
+  text-align: left;
 }
 .submit-button{
   background-color: #161616; 
@@ -477,7 +495,7 @@
   font-family:'Courier New', Courier, monospace;
   font-weight: 700;
   font-size: 18px;
-  color: #141414;
+  color: #a8a8a8;
 }
 .link:hover{
   text-shadow: #a19f9f;
@@ -490,8 +508,45 @@
   font-family:'Courier New', Courier, monospace;
   font-weight: 700;
   font-size: 18px;
-  color: #141414;
+  color: #ffffff;
 }
 .link2:hover{
   text-shadow: #a19f9f;
+}
+.form-style {
+  position: relative;
+  padding: 10px;
+  height: 40px;
+  width: 414px;
+  max-width: 80vw;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: #636363;
+  background-color: #4d4d4d;
+  border: 1px solid rgb(39, 39, 39);
+  border-radius: 3px;
+  outline: none;
+  -webkit-transition: all 200ms linear;
+  transition: border-color .2s ease-in-out;
+}
+
+.form-style1 {
+  position: relative;
+  padding: 10px;
+  height: 20px;
+  width: 200px;
+  max-width: 80vw;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  background-color: #cfcfcf;
+  border: 1px solid rgb(124, 124, 124);
+  border-radius: 3px;
+  outline: none;
+  -webkit-transition: all 200ms linear;
+  transition: border-color .2s ease-in-out;
 }

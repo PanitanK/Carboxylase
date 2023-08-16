@@ -59,20 +59,22 @@ function Login() {
         <Link to="/Register" class="link2">Don't have an account?</Link>
         <form onSubmit={handleLogin}>
           <div>
-            <label htmlFor="Email" class="label">Email:</label>
+            <h5 htmlFor="Email" class="input-placeholder">Email</h5>
             <input
               type="text"
               id="Email"
+              class="form-style"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="password" class="label">Password:</label>
+            <h5 htmlFor="password" class="input-placeholder">Password</h5>
             <input
               type="password"
               id="password"
+              class="form-style"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

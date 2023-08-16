@@ -141,40 +141,44 @@ function Register() {
         <form onSubmit={Reg}>
           
           <div>
-            <label htmlFor="First_Name"class="label">Firstname:</label>
+            <h5 htmlFor="First_Name"class="input-placeholder">Firstname</h5>
             <input
               type="text"
               id="Firstname"
+              class="form-style"
               value={Firstname}
               onChange={(e) => regFirstName(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="Last_Name" class="label">Lastname:</label>
+            <h5 htmlFor="Last_Name" class="input-placeholder">Lastname</h5>
             <input
               type="text"
               id="Lastname"
+              class="form-style"
               value={Lastname}
               onChange={(e) => regLastName(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="Email"class="label">Email:</label>
+            <h5 htmlFor="Email"class="input-placeholder">Email</h5>
             <input
               type="text"
               id="username"
+              class="form-style"
               value={email}
               onChange={(e) => regEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="Password"class="label">Password:</label>
+            <h5 htmlFor="Password"class="input-placeholder">Password</h5>
             <input
               type="password"
               id="password"
+              class="form-style"
               value={password}
               onChange={(e) => regPassword(e.target.value)}
               required

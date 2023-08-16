@@ -116,14 +116,17 @@ function Setting({ userUID, onDataUpdate }) {
         <div className="setting-container">
           
             <div className="text-input">
-            <div className="primary-header1"><h1>Default User Settings</h1></div>
+                
+            <div className="primary-header1">Default User Settings</div>
+            
               {desiredOrder.map((key) => (
                 
                 
                   <span>
-                  <label> {key} : </label>
+                  <label class="primary-header2"> {key} : </label>
                   <input
                     type="text"
+                    class="form-style1"
                     value={inputValues[key] != null ? inputValues[key] : userData[0][key]}
                     onChange={(e) => handleInputChange(key, e.target.value)}
                   />
