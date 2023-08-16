@@ -5,6 +5,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { db } from './Firebase';
 import { doc, setDoc,collection,getDocs} from 'firebase/firestore';
 
+import BermudaTriangleMap from './Bermuda';
+
 function PlotRegister() {
   const [Plotname, regPlotname] = useState('');
   const [ErrMSG, setErrMsg] = useState(null);
@@ -146,6 +148,9 @@ function PlotRegister() {
                 
             
               />
+            </div>
+            <div>
+              <BermudaTriangleMap/>
             </div>
             <p>{ErrMSG}</p>
             <button type="submit">ENTER</button>

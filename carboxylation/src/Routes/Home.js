@@ -8,6 +8,7 @@ import { db } from './Firebase';
 import {  collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import Setting from './Setting'; 
 import PlotComponent from './PlotComponent';
+import StaticMapComponent from './StaticMapComponent';
 
 function Home() {
   //var fetchcount = 0;
@@ -157,7 +158,7 @@ function Home() {
           <div className='Home-Page'>
             <h1>Welcome to your homepage!</h1>
             <p>Your Hometown is {userData && userData[0].Hometown}</p>
-
+            <StaticMapComponent initialCenter={{ lat: userData[0].Latitude, lng: userData[0].Longitude }} />
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
               <div className="info-container">
