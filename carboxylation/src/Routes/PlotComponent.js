@@ -1,45 +1,42 @@
 import React, { useState } from 'react';
 import ToggleArrow from './image/svg/Dasharrow.svg';
 import Gear from './image/logo/gear.png';
-//import Plotmap from './Plotmap'; // Import the Plotmap component
 
-function PlotComponent({ plotData, plotIndex }) {
+function PlotComponent(props) {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleCollapse = () => {
     setCollapsed(prevCollapsed => !prevCollapsed);
   };
 
-  /*const plotCoordinates = [
-    { lat: 37.772, lng: -122.214 },
-    { lat: 37.774, lng: -122.214 },
-    { lat: 37.774, lng: -122.216 },
-    { lat: 37.772, lng: -122.216 }
-  ];*/
-
   return (
     <div className="small-container">
       <div className='Container-Header'>
         <div className="toggle-button">
-          <span onClick={toggleCollapse}>
-            <img
-              className={`arrow ${collapsed ? "collapsed" : ""}`}
-              src={ToggleArrow}
-              alt="Toggle Arrow"
-            />
-          </span>
-        </div>
-        <span>{`Plot : No.${plotIndex}`}</span>
+
+        <span onClick={toggleCollapse} className="span-container">
         
+        <img
+          className={`arrow ${collapsed ? "collapsed" : ""}`}
+          src={ToggleArrow}
+          alt="Toggle Arrow"
+        />
+        <p className="plot-number">No.{props.plot.Plot_Number}</p>
+      </span>
+
+        </div>
+
+        <span>{`Plot :  ${props.plot.Plotname} `}</span>
         <img src={Gear} alt="Gear" className="gear" />
+
       </div>
 
       <div className={`content ${collapsed ? "collapsed" : ""}`}>
         <div className='Map-Box'>
-        
+          <p>Name: {props.plot.Plotname}</p>
+          <p>Area: {props.plot.Area} sq. meters</p>
+          {/* Display other properties of plotData as needed */}
         </div>
-       
-
       </div>
     </div>
   );

@@ -201,8 +201,10 @@ function Home() {
 
           <div className="big-container">
           
-          {plotDocuments.map((plotId, index) => (
-          <PlotComponent key={plotId} plotIndex={plotId} />
+          {plotDocuments.map((plot, index) => (
+          <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
+          
+          
         ))}
 
 
