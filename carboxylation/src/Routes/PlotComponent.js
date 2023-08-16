@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ToggleArrow from './image/svg/Dasharrow.svg';
 import Gear from './image/logo/gear.png';
+import StaticMapComponent from './StaticMapComponent';
+
 
 function PlotComponent(props) {
   const [collapsed, setCollapsed] = useState(true);
@@ -35,7 +37,7 @@ function PlotComponent(props) {
         <div className='Map-Box'>
           <p>Name: {props.plot.Plotname}</p>
           <p>Area: {props.plot.Area} sq. meters</p>
-          {/* Display other properties of plotData as needed */}
+          <StaticMapComponent initialCenter={{ lat: 15, lng: 20 }} />
         </div>
       </div>
     </div>

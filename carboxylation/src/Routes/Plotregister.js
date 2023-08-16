@@ -100,9 +100,12 @@ function PlotRegister() {
     <div className="App">
       <div className="static-bar">
         <div className="left-content">
-          <a href="/">
-            <img src={Title} alt="Title" />
-          </a>
+          
+            <img src={Title} alt="Title" onClick={() => {
+              navigate('/Home', { state: { userUID } });
+            
+            }} />
+       
         </div>
       </div>
 
