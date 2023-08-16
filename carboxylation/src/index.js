@@ -25,8 +25,8 @@ const router = createBrowserRouter([
     element:  <App/>,
   },
   {
-    path: "/Plotregister",
-    element:  <Plotregister/>,
+    path: 'Plotregister', 
+    element: <Plotregister />
   },
   {
     path: "/Login",
@@ -56,6 +56,8 @@ const router = createBrowserRouter([
         path: 'Setting', 
         element: <Setting />,
       },
+   
+
     ],
 
   }

@@ -1,74 +1,145 @@
+import './css/App.css';
+//import { Link } from "react-router-dom";
+import Title from './image/logo/CBX_Transparent.png';
 import React, { useState } from 'react';
-import { GoogleMap, LoadScript, Polygon } from '@react-google-maps/api';
+import { useNavigate } from 'react-router-dom';
+import {  db  } from './Firebase';
 
-function Plotregister() {
-  const [plotNo, setPlotNo] = useState('');
-  const [plotAge, setPlotAge] = useState('');
-  const [polygonPath, setPolygonPath] = useState([]);
-  const [drawingMode, setDrawingMode] = useState(false); // Add state for drawing mode
+import {  doc, setDoc } from 'firebase/firestore';
+//import {  ref , uploadBytes} from 'firebase/storage';
 
-  const handlePlotNoChange = (event) => {
-    setPlotNo(event.target.value);
+function PlotRegister() {
+
+ 
+  const [Plotname, regPlotname] = useState('');
+
+  
+  const [ErrMSG, setErrMsg] = useState(null);
+  
+  const navigate = useNavigate();
+  const { userUID } = window.location.state || {};
+  const [showSetting, setShowSetting] = useState(false); 
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const handleGearClick = () => {
+    setShowDropdown(!showDropdown);
   };
 
-  const handlePlotAgeChange = (event) => {
-    setPlotAge(event.target.value);
-  };
 
-  const handleMapClick = (event) => {
-    if (drawingMode) {
-      const updatedPath = [...polygonPath, event.latLng];
-      setPolygonPath(updatedPath);
+  const createUserDocumentAndSubcollections = async (userId, dataCollection) => {
+    try {
+      const dataDocumentId = 'PlotNO'; // Replace with your desired custom document ID
+      const dataDocumentRef = doc(db, 'USERS', userId, 'DataCollection', dataDocumentId);
+      await setDoc(dataDocumentRef, dataCollection);
+    } catch (error) {
+      console.error('Error creating user document and subcollections: ', error);
     }
   };
 
-  const handleToggleDrawingMode = () => {
-    setDrawingMode(!drawingMode);
-    setPolygonPath([]); // Clear existing polygon when toggling drawing mode
+  const Reg = async (event) => {
+    event.preventDefault();
+    try {
+      
+      setErrMsg(null);
+      const currentDate = new Date();
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed, so we add 1
+      const year = currentDate.getFullYear();
+
+    
+      const PlotCollection = { 
+        Plot_Credential: 'NULL',
+        Session_Created: `${day}/${month}/${year}`,
+        Session_Expiry: `${day}/${month+3}/${year}`,
+        Plotname : Plotname,
+        PlotCenter : (8.435164926  ,  99.95782950 ),
+
+        Plotpolygon : [
+
+          (8.435164926  ,  93.95782950 ),
+          (4.435164926  ,  99.94782950 ),
+          (3.435164926  ,  99.15782950 ),
+          (7.435164926  ,  99.25782950 )
+        
+        ],
+
+        Area : "",
+        PlotAge: 8,
+
+        
+
+      
+      };
+
+
+      // Create user document and storage folder simultaneously
+      await Promise.all([
+        createUserDocumentAndSubcollections(userUID, PlotCollection),
+       
+      ]);
+
+    } catch (error) {
+ 
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrMsg(errorCode + "  " + errorMessage);
+    
+    }
   };
 
-  const handleResetPolygon = () => {
-    setPolygonPath([]);
-  };
 
+  
   return (
-    <div>
-      <h1>Plot Information</h1>
-      <form>
-        {/* ... (Plot No and Plot Age inputs) */}
-      </form>
+    
+  <div className="App">
+    <div className="static-bar">
+      <div className="left-content">
+        <a href="/">
+          <img src={Title} alt="Title" /> 
+        </a>
+      </div>
 
-      <LoadScript
-        googleMapsApiKey="AIzaSyAS-9FhEUM8F00Bhhb6RwaI3DmEX4dMApU"
-      >
-        <GoogleMap
-          center={{ lat: 51.505, lng: -0.09 }}
-          zoom={13}
-          onClick={handleMapClick}
-          options={{
-            draggableCursor: drawingMode ? 'crosshair' : 'grab', // Change pointer style
-          }}
-          mapContainerStyle={{ height: '500px', width: '100%' }}
-        >
-          {polygonPath.length > 2 && (
-            <Polygon
-              paths={polygonPath}
-              options={{
-                strokeColor: 'blue',
-                fillColor: 'blue',
-                labelVisible: false, // Hide the label
-              }}
-            />
-          )}
-        </GoogleMap>
-      </LoadScript>
+      <div className="right-content">
+            {userData && userData.length > 0 ? (
+              <h2>USER : {userData[0].Name}</h2>
+            ) : (
+              <h2>User data not available</h2>
+            )}
+            <div className="gear-link" onClick={handleGearClick}>
+              
+            </div>
+         
 
-      <button onClick={handleToggleDrawingMode}>
-        {drawingMode ? 'Exit Drawing Mode' : 'Enter Drawing Mode'}
-      </button>
-      <button onClick={handleResetPolygon}>Reset Polygon</button>
+      </div>
+
     </div>
+
+     <div className="App-header">
+        <h1>Register</h1>
+        
+        <form onSubmit={Reg}>
+          
+          <div>
+            <label htmlFor="Plotname">Plotname:</label>
+            <input
+              type="text"
+              id="Plotname"
+              value={Plotname}
+              onChange={(e) => regPlotname(e.target.value)}
+              required
+            />
+          </div>
+          
+          <p>{ErrMSG}</p>
+          <button type="submit">ENTER</button>
+          
+        </form>
+      </div>
+    </div>
+
+  
+    
   );
 }
 
-export default Plotregister;
+export default PlotRegister;

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { auth , db ,storage } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import {  collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import {  doc, setDoc } from 'firebase/firestore';
 import {  ref , uploadBytes} from 'firebase/storage';
 
 
@@ -44,17 +44,16 @@ function Register() {
       const userDocRef = doc(db, 'USERS', userId);
       await setDoc(userDocRef, {});
   
-      // Create DataCollection subcollection
-      const dataCollectionRef = collection(db, 'USERS', userId, 'DataCollection');
-      await addDoc(dataCollectionRef, dataCollection);
-      //console.log('DataCollection document created');
+      const dataDocumentId = 'Credential_Data'; // Replace with your desired custom document ID
+      const dataDocumentRef = doc(db, 'USERS', userId, 'DataCollection', dataDocumentId);
+      await setDoc(dataDocumentRef, dataCollection);
   
-      // Create ProfileCollection subcollection
-      const profileCollectionRef = collection(db, 'USERS', userId, 'ProfileCollection');
-      await addDoc(profileCollectionRef, profileData);
-      //console.log('ProfileCollection document created');
+      const profileDocumentId = 'Profile_Data'; // Replace with your desired custom document ID
+      const profileDocumentRef = doc(db, 'USERS', userId, 'ProfileCollection', profileDocumentId);
+      await setDoc(profileDocumentRef, profileData);
+  
     } catch (error) {
-      //console.error('Error creating user document and subcollections: ', error);
+      console.error('Error creating user document and subcollections: ', error);
     }
   };
 
@@ -76,11 +75,12 @@ function Register() {
       
 
       const dataCollection = { Credential: 'NULL' };
+
       const profileData = { 
         Name: Firstname + " " + Lastname,
         FirstName:Firstname , 
         LastName:Lastname , 
-        Hometown: 'NULL' , 
+        Hometown: 'Unknown' , 
         Latitude : 8.435164926  , 
         Longitude : 99.95782950 , 
         Credit_Own : 0 ,

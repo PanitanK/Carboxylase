@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './Firebase';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
-import Setting from './Setting'; // Import the Setting component
+import Setting from './Setting'; 
 import PlotComponent from './PlotComponent';
 
 function Home() {
@@ -18,39 +18,27 @@ function Home() {
   const [userData, setUserData] = useState(null);
   const [HasFetched, setFetch] = useState(false);
   const [showSetting, setShowSetting] = useState(false); // State to track whether to show Setting component
-
+  
   const [showDropdown, setShowDropdown] = useState(false);
+  const [userPlotData , setUserPlotData] = useState(null);
+
+
 
   const plotDataObjects = [
     { carbonAbsorption: 50, expectedCarbonCredit: 0.05 },
     // Add more plot data objects as needed
   ];
-  
-  
 
-
-
-  /*const handleGearClick = () => {
-    setFetch(false)
-    setShowSetting((prevShowSetting) => !prevShowSetting); // Toggle showSetting state
-    if (!showSetting) {
-      navigate('/Home/Setting', { state: { userUID } });
-    } else {
-      navigate('/Home', { state: { userUID } });
-    }
-  };*/
-
-  
+  const PlotReg = () => {
+    navigate('/Plotregister',{ state: { userUID } });
+  };
 
   const handleGearClick = () => {
     setShowDropdown(!showDropdown);
   };
-
-
   const handleDataUpdate = () => {
-    setFetch(false); // This will trigger a re-fetch in the useEffect of Home
+    setFetch(false);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,14 +59,11 @@ function Home() {
       }
     };
 
-    //console.log("ABOUT TO FETCH");
+
     if (!HasFetched){
-      //console.log("FETCHING " )
       fetchData();
       setFetch(true)
-    
     }
-    //console.log("FETCHED");
   }, [userUID, userCollectionRef, HasFetched]); 
 
   if (location.state == null) {
@@ -90,16 +75,17 @@ function Home() {
         <a href='/login'> Click here to return </a>
       </div>
     );
-  } else if (!userData) {
+  } 
+  
+  else if (!userData) {
     return <div className="App-header">Loading...</div>;
-  } else {
-    //console.log(userData); // Log the entire userData for debugging purposes
-
+  } 
+  
+  else {
     return (
       <div className="App">
         <div className="static-bar">
           <div className="left-content">
-  
           <img
             src={Title}
             alt="Title"
@@ -107,7 +93,7 @@ function Home() {
               navigate('/Home', { state: { userUID } });
               setShowSetting(false);
             }}
-            style={{ cursor: 'pointer' }} // Add cursor style here
+            style={{ cursor: 'pointer' }} 
           />
           </div>
           <div className="right-content">
@@ -131,7 +117,7 @@ function Home() {
                   </button>
                   <button
                     onClick={() => {
-                      setShowSetting(true); // Change the state here
+                      setShowSetting(true); 
                       navigate('/Home/Setting', { state: { userUID } });
                     }}
                   >
@@ -153,8 +139,8 @@ function Home() {
 
           <div className='Home-Page'>
             <h1>Welcome to your homepage!</h1>
-            <p>Your Home town is {userData && userData[0].Hometown}</p>
-
+            <p>Your Hometown is {userData && userData[0].Hometown}</p>
+            
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
               <div className="info-container">
@@ -195,16 +181,28 @@ function Home() {
           <div className="big-container">
           
           {plotDataObjects.map((plotData, index) => (
+
+             // Task SET LOOP RENDER
             <PlotComponent
-              key={'525'} // Make sure to provide a unique key
+              key={'525'}
               plotData={plotData}
               plotIndex={'525'}
             />
           ))}
+
+          {plotDataObjects.map((plotData, index) => (
+
+          // Task SET LOOP RENDER
+          <PlotComponent
+          key={'535'}
+          plotData={plotData}
+          plotIndex={'535'}
+          />
+          ))}
             
 
           <div className='AddPlot'>  
-            <button className='addPlotButton'>+ Add New Plot</button>
+            <button className='addPlotButton' onClick={PlotReg} >+ Add New Plot</button>
           </div>
 
         </div>
