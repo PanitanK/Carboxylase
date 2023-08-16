@@ -22,7 +22,7 @@ function Setting({ userUID, onDataUpdate }) {
       };
 
     const handleSubmit = async () => {
-        console.log(inputValues)
+        //console.log(inputValues)
         setErrorMSG("")
         if (Object.keys(inputValues).length  < 1 ) {
            
@@ -30,7 +30,7 @@ function Setting({ userUID, onDataUpdate }) {
             return 
         }
 
-        console.log("THIS IS userData[0] : ", Object.keys(userData[0]) )
+        //console.log("THIS IS userData[0] : ", Object.keys(userData[0]) )
         const result = await dbUpdate(inputValues);
         
         if (result) {
@@ -58,10 +58,10 @@ function Setting({ userUID, onDataUpdate }) {
                 
                 await updateDoc(profileDocRef, data);
                 
-                console.log("Document updated successfully");
+                //console.log("Document updated successfully");
                 return true; // Return true to indicate success
             } else {
-                console.log("No profile document found.");
+                //console.log("No profile document found.");
                 return false; // Return false to indicate failure
             }
         } catch (error) {
@@ -144,7 +144,7 @@ function Setting({ userUID, onDataUpdate }) {
           </div>
       
           <button onClick={handleSubmit}class="submit-button">Save Changes</button>
-          <p>{ErrorMSG}</p>
+          <p className='SettingMSGText'>{ErrorMSG}</p>
         </div>
       );
     }

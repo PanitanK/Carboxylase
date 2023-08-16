@@ -14,14 +14,17 @@ function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log('Submitted username:', email);
-    console.log('Submitted password:', password);
+    
+    //console.log('Submitted username:', email);
+    //console.log('Submitted password:', password);
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const _user = userCredential.user;
-      console.log(userCredential)
-      console.log(_user.uid)
+
+      //console.log(userCredential)
+      //console.log(_user.uid)
+
       setErrMsg(null);
       navigate('/Protected', { state: { userUID: _user.uid } });
 
@@ -58,6 +61,7 @@ function Login() {
       <div className="primary-header"><h1>Login page</h1></div>
         <Link to="/Register" class="link2">Don't have an account?</Link>
         <form onSubmit={handleLogin}>
+
           <div>
             <h5 htmlFor="Email" class="input-placeholder">Email</h5>
             <input
@@ -69,6 +73,7 @@ function Login() {
               required
             />
           </div>
+          
           <div>
             <h5 htmlFor="password" class="input-placeholder">Password</h5>
             <input

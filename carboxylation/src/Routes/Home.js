@@ -5,7 +5,7 @@ import Placeholder from './image/logo/Placeholder.png'
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './Firebase';
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import {  collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import Setting from './Setting'; 
 import PlotComponent from './PlotComponent';
 
@@ -18,9 +18,9 @@ function Home() {
   const [userData, setUserData] = useState(null);
   const [HasFetched, setFetch] = useState(false);
   const [showSetting, setShowSetting] = useState(false); // State to track whether to show Setting component
-  
+  const [plotDocuments, setplotDocuments] = useState([])
   const [showDropdown, setShowDropdown] = useState(false);
-  const [userPlotData , setUserPlotData] = useState(null);
+  //const [userPlotData , setUserPlotData] = useState(null);
 
 
 
@@ -28,6 +28,24 @@ function Home() {
     { carbonAbsorption: 50, expectedCarbonCredit: 0.05 },
     // Add more plot data objects as needed
   ];
+
+  const fetchPlotDocuments = async (userUID) => {
+    const dataCollectionRef = collection(db, 'USERS', userUID, 'DataCollection');
+  
+    try {
+      const querySnapshot = await getDocs(dataCollectionRef);
+      const plotDocuments = querySnapshot.docs
+        .filter((doc) => doc.id.startsWith('PlotNO_'))
+        .map((doc) => doc.data());
+        
+      return plotDocuments;
+    } catch (error) {
+      console.error('Error fetching plot documents:', error);
+      return [];
+    }
+  };
+  
+
 
   const PlotReg = () => {
     navigate('/Plotregister',{ state: { userUID } });
@@ -44,7 +62,10 @@ function Home() {
       try {
         const userDocRef = doc(userCollectionRef, userUID);
         const userDocSnapshot = await getDoc(userDocRef);
-
+        const plotDocuments = await fetchPlotDocuments(userUID);
+        //console.log('Plot Documents:', plotDocuments[1].Plot_Number);
+        setplotDocuments(plotDocuments)
+        
         if (userDocSnapshot.exists()) {
           const USERS_UID_SubCollection = collection(userDocRef, 'ProfileCollection');
           const USERS_UID_SubCollection_Snapshot = await getDocs(USERS_UID_SubCollection);
@@ -180,25 +201,11 @@ function Home() {
 
           <div className="big-container">
           
-          {plotDataObjects.map((plotData, index) => (
+          {plotDocuments.map((plotId, index) => (
+          <PlotComponent key={plotId} plotIndex={plotId} />
+        ))}
 
-             // Task SET LOOP RENDER
-            <PlotComponent
-              key={'525'}
-              plotData={plotData}
-              plotIndex={'525'}
-            />
-          ))}
 
-          {plotDataObjects.map((plotData, index) => (
-
-          // Task SET LOOP RENDER
-          <PlotComponent
-          key={'535'}
-          plotData={plotData}
-          plotIndex={'535'}
-          />
-          ))}
             
 
           <div className='AddPlot'>  
