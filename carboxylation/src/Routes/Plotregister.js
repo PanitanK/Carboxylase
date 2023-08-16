@@ -135,6 +135,15 @@ function PlotRegister() {
                 required
               />
             </div>
+
+            <div>
+              <label htmlFor="PlotAge">Plot Age:</label>
+              <input
+                
+                
+            
+              />
+            </div>
             <p>{ErrMSG}</p>
             <button type="submit">ENTER</button>
           </form>
