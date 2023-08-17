@@ -8,6 +8,7 @@ import { db } from './Firebase';
 import {  collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import Setting from './Setting'; 
 import PlotComponent from './PlotComponent';
+import StaticMapComponent from './StaticMapComponent';
 
 function Home() {
   //var fetchcount = 0;
@@ -24,11 +25,7 @@ function Home() {
 
 
 
-  const plotDataObjects = [
-    { carbonAbsorption: 50, expectedCarbonCredit: 0.05 },
-    // Add more plot data objects as needed
-  ];
-
+ 
   const fetchPlotDocuments = async (userUID) => {
     const dataCollectionRef = collection(db, 'USERS', userUID, 'DataCollection');
   
@@ -159,24 +156,20 @@ function Home() {
         ) : (
 
           <div className='Home-Page'>
-            <h1 class="primary-header4">Welcome to your homepage!</h1>
-            <p class="primary-header5">Your Hometown is {userData && userData[0].Hometown}</p>
-            
+
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
               <div className="info-container">
                 <div className="header">Credential Info</div>
+                
                 <div>
                   <span className="info-label">Firstname :</span>
                   <span className="info-value">{userData[0].FirstName}</span>
-                  
                 </div>
                 <div>
                   <span className="info-label">Lastname :</span>
-                  <span className="info-value">{userData[0].LastName}</span>
-                  
+                  <span className="info-value">{userData[0].LastName}</span> 
                 </div>
-              
                 <div>
                   <span className="info-label">Issued Date:</span>
                   <span className="info-value">{userData[0].Created_Date}</span>
@@ -195,33 +188,22 @@ function Home() {
                   <span className="info-label"> Credits</span>
                 </div>
 
-
               </div>
             </div>
 
-          <div className="big-container2">
-          
+
           {plotDocuments.map((plot, index) => (
           <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
-          
-          
         ))}
-
-
-            
-
           <div className='AddPlot'>  
             <button className='addPlotButton' onClick={PlotReg} >+ Add New Plot</button>
           </div>
-
         </div>
       </div>
         )}
-
         <footer className="footer">
         <p></p>
         </footer>
-        
       </div>
     </div>
     );
