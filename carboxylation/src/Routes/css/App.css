@@ -184,7 +184,17 @@
   background-color: #bebebe;
   
 }
-
+.big-container2 {
+  outline: 2px solid black; 
+  padding: 20px; 
+  display: flex;
+  flex-direction: column; 
+  border-radius: 10px;
+  background-color: #bebebe;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: 800;
+  font-size: 30px;
+}
 
 
 
@@ -297,14 +307,25 @@
   text-align: left;
   font-weight: bold;
   margin-bottom: 15px;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .info-label {
   font-weight: bold;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 20px;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .info-value {
   margin-left: 10px;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 20px;
+  font-weight: 600;
+  color: #444444;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .AddPlot {
@@ -323,6 +344,7 @@
   padding: 10px 20px; 
   border: none; 
   cursor: pointer;
+  font-family:'Courier New', Courier, monospace;
 }
 
 .Map-Box{
@@ -336,6 +358,22 @@
 
 .centering-wrapper{
   width: 400px;
+  margin: auto;
+  margin-top: 100px;
+  background-color: rgba(1, 14, 31, 0.25);
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-template-rows: auto auto auto; 
+  gap: 10px; 
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.centering-wrapper1{
+  width: 700px;
   margin: auto;
   margin-top: 100px;
   background-color: rgba(1, 14, 31, 0.25);
@@ -374,7 +412,7 @@
   font-weight: 800;
   margin-bottom: 8px;
   font-family:'Courier New', Courier, monospace;
-  
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .primary-header1{
   color: #000000;
@@ -383,7 +421,7 @@
   font-weight: 800;
   margin-bottom: 5%;
   font-family:'Courier New', Courier, monospace;
-  
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .primary-header2{
   color: #000000;
@@ -392,6 +430,7 @@
   font-weight: 800;
   margin-bottom: 8px;
   font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .primary-header3{
   color: #000000;
@@ -400,6 +439,26 @@
   font-weight: 800;
   margin-bottom: 8px;
   font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.primary-header4{
+  color: #000000;
+  font-size: 50px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+.primary-header5{
+  color: #1b1b1b;
+  font-size: 30px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .input-position{
   margin-top: 20px;
@@ -527,7 +586,6 @@ input::placeholder {
   -webkit-transition: all 200ms linear;
   transition: border-color .2s ease-in-out;
 }
-
 .form-style1 {
   position: relative;
   padding: 10px;
@@ -546,18 +604,39 @@ input::placeholder {
   -webkit-transition: all 200ms linear;
   transition: border-color .2s ease-in-out;
 }
-
+.form-style2 {
+  position: relative;
+  padding: 10px;
+  height: 20px;
+  width: 200px;
+  max-width: 80vw;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  background-color: #5c5c5c;
+  border: 1px solid rgb(124, 124, 124);
+  border-radius: 3px;
+  outline: none;
+  -webkit-transition: all 200ms linear;
+  transition: border-color .2s ease-in-out;
+}
 .SettingMSGText {
   color: white;
 }
-
 .span-container {
   display: flex;
   align-items: center; /* Vertically center align the items */
-  
-
 }
-
 .plot-number {
   margin-left: 10px; /* Adjust the value as needed */
+}
+.info-plot{
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
 }

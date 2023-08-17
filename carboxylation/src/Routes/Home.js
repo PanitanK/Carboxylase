@@ -156,9 +156,7 @@ function Home() {
         ) : (
 
           <div className='Home-Page'>
-            <h1>Welcome to your homepage!</h1>
-            <p>Your Hometown is {userData && userData[0].Hometown}</p>
-            <StaticMapComponent initialCenter={{ lat: userData[0].Latitude, lng: userData[0].Longitude }} />
+
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
               <div className="info-container">
@@ -193,8 +191,6 @@ function Home() {
               </div>
             </div>
 
-          <div className="big-container">    
-          <p>You have {plotDocuments.length} plot(s) registered </p>
 
           {plotDocuments.map((plot, index) => (
           <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
