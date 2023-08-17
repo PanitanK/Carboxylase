@@ -156,13 +156,12 @@ function Home() {
         ) : (
 
           <div className='Home-Page'>
-            <h1>Welcome to your homepage!</h1>
-            <p>Your Hometown is {userData && userData[0].Hometown}</p>
-            <StaticMapComponent initialCenter={{ lat: userData[0].Latitude, lng: userData[0].Longitude }} />
+            <h1 class="primary-header4">Welcome to your homepage!</h1>
+            <p class="primary-header5">Your Hometown is {userData && userData[0].Hometown}</p>
+            
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
               <div className="info-container">
-                <div className="header">Credential Info</div>
                 
                 <div>
                   <span className="info-label">Firstname :</span>
