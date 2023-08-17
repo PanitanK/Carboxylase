@@ -158,7 +158,8 @@ function Home() {
           <div className='Home-Page'>
             <h1 class="primary-header4">Welcome to your homepage!</h1>
             <p class="primary-header5">Your Hometown is {userData && userData[0].Hometown}</p>
-            
+            <StaticMapComponent initialCenter={{ lat: userData.Latitude, lng: userData.Longitude }} />
+
 
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>

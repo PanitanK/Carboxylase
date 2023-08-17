@@ -58,7 +58,7 @@ function Login() {
       <div className="App-header"> 
       <div className="centering-wrapper">
       <div className="section1 text-center">
-      <div className="primary-header"><h1>Login page</h1></div>
+      <div className="primary-header"><h1>Login</h1></div>
         <Link to="/Register" class="link2">Don't have an account?</Link>
         <form onSubmit={handleLogin}>
 
