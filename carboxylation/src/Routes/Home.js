@@ -159,6 +159,7 @@ function Home() {
             <h1 class="primary-header4">Welcome to your homepage!</h1>
             <p class="primary-header5">Your Hometown is {userData && userData[0].Hometown}</p>
             
+
             <div className="credential-box">
               <img className="image" src={Placeholder} alt="Placeholder"></img>
               <div className="info-container">
@@ -192,8 +193,6 @@ function Home() {
               </div>
             </div>
 
-          <div className="big-container">    
-          <p>You have {plotDocuments.length} plot(s) registered </p>
 
           {plotDocuments.map((plot, index) => (
           <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
@@ -202,7 +201,7 @@ function Home() {
             <button className='addPlotButton' onClick={PlotReg} >+ Add New Plot</button>
           </div>
         </div>
-      </div>
+   
         )}
         <footer className="footer">
         <p></p>

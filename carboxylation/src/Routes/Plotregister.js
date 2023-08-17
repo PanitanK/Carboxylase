@@ -112,8 +112,10 @@ function PlotRegister() {
       </div>
 
       <div className="App-header">
-        <h1>Plot Registration</h1>
-
+      <div className="centering-wrapper1">
+      <div className="section1 text-center">
+        <h1 class="primary-header4">Plot Registration</h1>
+        
         {!userUID && (
           <div>
             <label htmlFor="userUIDInput">Enter User UID:</label>
@@ -131,20 +133,21 @@ function PlotRegister() {
         {showPlotInput && (
           <form onSubmit={handlePlotnameSubmit}>
             <div>
-              <label htmlFor="Plotname">Plotname:</label>
+              <label htmlFor="Plotname"class="info-plot">Plotname: </label>
               <input
                 type="text"
                 id="Plotname"
                 value={Plotname}
+                class="form-style2"
                 onChange={(e) => regPlotname(e.target.value)}
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="PlotAge">Plot Age:</label>
+              <label htmlFor="PlotAge"class="info-plot">Plot Age: </label>
               <input
-                
+                class="form-style2"
                 
             
               />
@@ -153,10 +156,12 @@ function PlotRegister() {
               <BermudaTriangleMap/>
             </div>
             <p>{ErrMSG}</p>
-            <button type="submit">ENTER</button>
+            <button type="submit"class="submit-button">ENTER</button>
           </form>
         )}
       </div>
+    </div>
+    </div>
     </div>
   );
 }
