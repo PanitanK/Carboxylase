@@ -1,46 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const MapFrame = () => {
-  const [receivedMessages, setReceivedMessages] = useState([]);
-  
-  const handleMessage = (event) => {
-    if (event.origin !== window.location.origin) {
-      return;
-    }
-
-    const vertexInfo = event.data;
-    setReceivedMessages((prevMessages) => [...prevMessages, vertexInfo]);
-  };
-
   useEffect(() => {
-    window.addEventListener("message", handleMessage);
+    window.addEventListener("message", receiveMessage);
 
     return () => {
-      window.removeEventListener("message", handleMessage);
+      window.removeEventListener("message", receiveMessage);
     };
   }, []);
 
-  const handleSendData = () => {
-    // Simulate sending data to iframe
-    const iframe = document.querySelector("iframe");
-    iframe.contentWindow.postMessage("Send me vertex data!", "*");
+  const receiveMessage = (event) => {
+    if (event.data.type === "polygonCoordinates") {
+      const polygonCoordinates = event.data.coordinates;
+      console.log("Received polygon coordinates:", polygonCoordinates);
+    }
   };
 
   return (
-    <div>
-      <h1>Google Maps Drawing Example</h1>
-      <button onClick={handleSendData}>Send Vertex Data</button>
-      <div>
-        <h2>Received Messages:</h2>
-        <ul>
-          {receivedMessages.map((message, index) => (
-            <li key={index}>{JSON.stringify(message)}</li>
-          ))}
-        </ul>
-      </div>
+    <div className="MapBoxContainerForDraw">
+      <h1>Check your plot production</h1>
       <iframe
         src="/mapdrawing.html"
-        width="100%"
+        width="80%"
         height="400px"
         frameBorder="0"
         title="Google Map"

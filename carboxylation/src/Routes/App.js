@@ -31,8 +31,9 @@ function App() {
       <header className="App-header">
         <p>Main Page</p>
         <Mapframe />
+        <div className="footer"></div>
       </header>
-
+    
     </div>
   );
 }

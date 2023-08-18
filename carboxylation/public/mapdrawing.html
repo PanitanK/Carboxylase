@@ -2,17 +2,69 @@
 <html>
 <head>
   <title>Google Map with Drawing</title>
+  <style>
+    body {
+      color: white;
+      margin: 0;
+    }
+    #map {
+      width: 100%;
+      height: calc(100vh - 50px);
+    }
+    .input-container {
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .input-container input {
+      width: 100px;
+      padding: 8px;
+      margin-left: 2px;
+      margin-right: 5px;
+    }
+    .input-container button {
+      margin-left: 10px;
+    }
+    .input-container label {
+      color: white;
+      margin-right: 5px;
+    }
+    .color-picker {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div id="map" style="width: 100%; height: 400px;"></div>
+  <div id="map"></div>
+  <div class="input-container">
+    <label for="latitude">Latitude:</label>
+    <input type="text" id="latitude" placeholder="Enter latitude">
+    <label for="longitude">Longitude:</label>
+    <input type="text" id="longitude" placeholder="Enter longitude">
+    <button onclick="navigateToCoordinates()">Navigate</button>
+    <div class="color-picker">
+      <label for="color">Polygon Color:</label>
+      <input type="color" id="color" value="#FF0000">
+    </div>
+  </div>
   <script>
+    let map;
+    let drawingManager;
+    let currentPolygon;
+  
     function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 8.5, lng: 100 },
+        zoom: 6,
       });
-
-      const drawingManager = new google.maps.drawing.DrawingManager({
+  
+      drawingManager = new google.maps.drawing.DrawingManager({
         drawingMode: google.maps.drawing.OverlayType.POLYGON,
         drawingControl: true,
         drawingControlOptions: {
@@ -25,38 +77,66 @@
           icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
         },
       });
-
+  
       drawingManager.setMap(map);
-
-      let currentPolygon;
-
-      function sendVertexInfo(action, index, latLng) {
-        const vertexInfo = {
-          action: action,
-          index: index,
-          latLng: latLng.toJSON(),
-        };
-
-        window.parent.postMessage(vertexInfo, "*");
-      }
-
+  
+      let selectedColor = "#FF0000"; // Default color is red
+  
+      const colorPicker = document.getElementById("color");
+      colorPicker.addEventListener("change", (event) => {
+        selectedColor = event.target.value;
+      });
+  
       google.maps.event.addListener(drawingManager, "overlaycomplete", function (event) {
         if (event.type === google.maps.drawing.OverlayType.POLYGON) {
           currentPolygon = event.overlay;
-
-          google.maps.event.addListener(currentPolygon.getPath(), "set_at", function (index, latLng) {
-            sendVertexInfo("move", index, latLng);
+          currentPolygon.setOptions({
+            fillColor: selectedColor,
+            strokeColor: selectedColor, // Set stroke color when complete
           });
-
-          google.maps.event.addListener(currentPolygon.getPath(), "insert_at", function (index, latLng) {
-            sendVertexInfo("insert", index, latLng);
-          });
-
-          google.maps.event.addListener(currentPolygon.getPath(), "remove_at", function (index) {
-            sendVertexInfo("remove", index);
+  
+          const polygonCoordinates = currentPolygon.getPath().getArray().map(coord => ({ lat: coord.lat(), lng: coord.lng() }));
+          window.parent.postMessage({ type: "polygonCoordinates", coordinates: polygonCoordinates, color: selectedColor }, "*");
+        }
+      });
+  
+      google.maps.event.addListener(drawingManager, "drawingmode_changed", function () {
+        if (drawingManager.getDrawingMode() === null && currentPolygon) {
+          currentPolygon.setOptions({
+            strokeColor: selectedColor, // Set stroke color during drawing
           });
         }
       });
+  
+      google.maps.event.addListener(map, "center_changed", function() {
+        updateCenterLocationInput();
+      });
+  
+      updateCenterLocationInput();
+    }
+  
+
+    function navigateToCoordinates() {
+      const latitudeInput = document.getElementById("latitude");
+      const longitudeInput = document.getElementById("longitude");
+      const lat = parseFloat(latitudeInput.value.trim());
+      const lng = parseFloat(longitudeInput.value.trim());
+
+      if (!isNaN(lat) && !isNaN(lng)) {
+        const location = new google.maps.LatLng(lat, lng);
+        map.panTo(location);
+      } else {
+        console.log("Invalid coordinates input.");
+      }
+    }
+
+    function updateCenterLocationInput() {
+      const center = map.getCenter();
+      const latitudeInput = document.getElementById("latitude");
+      const longitudeInput = document.getElementById("longitude");
+      
+      latitudeInput.value = center.lat();
+      longitudeInput.value = center.lng();
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS-9FhEUM8F00Bhhb6RwaI3DmEX4dMApU&libraries=drawing&callback=initMap" async defer></script>
