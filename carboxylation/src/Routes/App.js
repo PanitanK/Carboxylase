@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
 import './css/App.css';
-
+import Mapframe from "./Mapframe";
 
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
 
       <header className="App-header">
         <p>Main Page</p>
+        <Mapframe />
       </header>
 
     </div>

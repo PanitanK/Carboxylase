@@ -7,6 +7,7 @@ import {
 
 
 
+
 import './index.css';
 
 import App from './Routes/App';
@@ -18,11 +19,18 @@ import Protected from './Routes/Protected';
 import ForgotPassword from './Routes/ForgotPassword';
 import Setting from './Routes/Setting';
 import Plotregister from './Routes/Plotregister'
+import Mapframe from './Routes/Mapframe';
+
 const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <Err />,
     element:  <App/>,
+  },
+  {
+    path: "/Mapframe",
+    
+    element:  <Mapframe/>,
   },
   {
     path: 'Plotregister', 

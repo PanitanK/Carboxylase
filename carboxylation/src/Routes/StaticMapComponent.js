@@ -9,12 +9,18 @@ function StaticMapComponent({ initialCenter }) {
     return <div>Loading...</div>; // You can replace this with a loading indicator or any other content
   }
 
-  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${initialCenter.lat},${initialCenter.lng}&zoom=15&size=400x400&maptype=satellite&key=${apiKey}`;
+  const label = "Your Long Text"; // Replace with the text you want to display
+  const truncatedLabel = label.length > 10 ? label.substr(0, 10) + "..." : label; // Truncate if it's too long
+  
+  // Encode the truncated label for URL safety
+  const encodedLabel = encodeURIComponent(truncatedLabel);
+  
+  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${initialCenter.lat},${initialCenter.lng}&zoom=15&size=400x400&maptype=satellite&markers=label:${encodedLabel}|${initialCenter.lat},${initialCenter.lng}&key=${apiKey}`;
 
-  return (
-    <div>
+return (
+    <div> 
       <div>
-        <img src={mapUrl} alt="Static Map" style={{ width: '100%', height: '400px' }} />
+        <img src={mapUrl} alt="Static Map" style={{ width: '100%', height: '100%' }} />
       </div>
     </div>
   );

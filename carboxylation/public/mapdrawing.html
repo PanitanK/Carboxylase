@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Map with Drawing</title>
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 400px;"></div>
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+
+      const drawingManager = new google.maps.drawing.DrawingManager({
+        drawingMode: google.maps.drawing.OverlayType.POLYGON,
+        drawingControl: true,
+        drawingControlOptions: {
+          position: google.maps.ControlPosition.TOP_CENTER,
+          drawingModes: [
+            google.maps.drawing.OverlayType.POLYGON,
+          ],
+        },
+        markerOptions: {
+          icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+        },
+      });
+
+      drawingManager.setMap(map);
+
+      let currentPolygon;
+
+      function sendVertexInfo(action, index, latLng) {
+        const vertexInfo = {
+          action: action,
+          index: index,
+          latLng: latLng.toJSON(),
+        };
+
+        window.parent.postMessage(vertexInfo, "*");
+      }
+
+      google.maps.event.addListener(drawingManager, "overlaycomplete", function (event) {
+        if (event.type === google.maps.drawing.OverlayType.POLYGON) {
+          currentPolygon = event.overlay;
+
+          google.maps.event.addListener(currentPolygon.getPath(), "set_at", function (index, latLng) {
+            sendVertexInfo("move", index, latLng);
+          });
+
+          google.maps.event.addListener(currentPolygon.getPath(), "insert_at", function (index, latLng) {
+            sendVertexInfo("insert", index, latLng);
+          });
+
+          google.maps.event.addListener(currentPolygon.getPath(), "remove_at", function (index) {
+            sendVertexInfo("remove", index);
+          });
+        }
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS-9FhEUM8F00Bhhb6RwaI3DmEX4dMApU&libraries=drawing&callback=initMap" async defer></script>
+</body>
+</html>

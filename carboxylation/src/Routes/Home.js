@@ -198,7 +198,7 @@ function Home() {
           {plotDocuments.map((plot, index) => (
           <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
         ))}
-          <div className='AddPlot'>  
+           <div className='AddPlot'>  
             <button className='addPlotButton' onClick={PlotReg} >+ Add New Plot</button>
           </div>
         </div>
