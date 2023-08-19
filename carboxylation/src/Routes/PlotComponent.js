@@ -37,7 +37,7 @@ function PlotComponent(props) {
         <div className='Map-Box'>
           <p>Name: {props.plot.Plotname}</p>
           <p>Area: {props.plot.Area} sq. meters</p>
-          <StaticMapComponent initialCenter={{ lat: 15, lng: 20 }} />
+          <StaticMapComponent initialCenter={{ lat: props.plot.PlotCenter[0] , lng: props.plot.PlotCenter[1] }} />
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { doc, setDoc,collection,getDocs} from 'firebase/firestore';
 
 function PlotRegister() {
   const [Plotname, regPlotname] = useState('');
+  const [PlotAge , regPlotAge] = useState(0);
   const [ErrMSG, setErrMsg] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,14 +17,51 @@ function PlotRegister() {
   const [userUID, setUserUID] = useState(userUIDProp || ''); 
   const [userUIDinput, setUserUIDinput] = useState(''); 
   const [showPlotInput, setShowPlotInput] = useState(false);
+  const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 
+  
   useEffect(() => {
-    console.log(userUID)
+    console.log(userUID);
     if (userUID) {
-      console.log('userUID OK')
+      console.log('userUID OK');
       setShowPlotInput(true);
     }
-  }, [userUID]);
+
+    const receiveMessage = (event) => {
+      if (event.data.type === 'polygonCoordinates') {
+        const receivedCoordinates = event.data.coordinates;
+        setPolygonCoordinates(receivedCoordinates);
+        console.log(polygonCoordinates);
+      }
+    };
+
+    window.addEventListener('message', receiveMessage);
+
+    return () => {
+      window.removeEventListener('message', receiveMessage);
+    };
+  }, [userUID, polygonCoordinates]);
+
+  
+
+  const calculatePolygonArea = (coords) => {
+    if (coords.length < 3) return 0;
+
+    let area = 0;
+
+    for (let i = 0; i < coords.length; i++) {
+      const curr = coords[i];
+      const next = coords[(i + 1) % coords.length];
+
+      area += (next.lng + curr.lng) * (next.lat - curr.lat);
+    }
+
+    // Conversion factor: 1 sq degree = 111.32 sq km (approximately)
+    const sqKmArea = (Math.abs(area) / 2) * 111.32 * 111.32;
+    
+    return sqKmArea;
+  }
+
 
   const AddPlotToDB = async (userId,dataDocumentId, PlotCollection) => {
     console.log("Trying AddPlotToBD")
@@ -48,6 +86,8 @@ function PlotRegister() {
     setShowPlotInput(true); // Show the Plotname input form
   };
 
+  
+
   const handlePlotnameSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -60,29 +100,39 @@ function PlotRegister() {
 
       const dataCollectionRef = collection(db, 'USERS', userUID, 'DataCollection');
       const dataCollectionSnapshot = await getDocs(dataCollectionRef);
-      const documentCount = dataCollectionSnapshot.size;
-  
-      // Construct the document ID with an incremented number
-      console.log("THIS IS HOW MANY Data " , documentCount)
-
+      const documentCount = dataCollectionSnapshot.size
       const dataDocumentId = `PlotNO_${documentCount}`;
-      console.log("This is dataDocutmentId")
+ 
+      const getcenter = ((Coordinates)=> {
+
+        var centerlat = 0
+        var centerlng = 0 
+        var CDL = Coordinates.length
+        for (let i = 0; i < CDL ; i++) {
+
+          centerlat = centerlat + Coordinates[i].lat
+          centerlng = centerlng + Coordinates[i].lng
+        }
+
+        centerlat = centerlat/CDL
+        centerlng = centerlng/CDL 
+
+        return [centerlat,centerlng]
+
+      })
+     
+
       const PlotCollection = {
         Plot_Number : documentCount,
         Plotname: Plotname,
         Plot_Credential: 'NULL',
         Session_Created: `${day}/${month}/${year}`,
-        Session_Expiry: `${day}/${month + 3}/${year}`,
-        PlotCenter: [8.435164926, 99.9578295],
+        Session_Expiry: `${day}/${month}+3/${year}`,
+        
 
-        Plotpolygon: [
-          { lat: 8.435164926, lng: 93.9578295 },
-          { lat: 4.435164926, lng: 99.9478295 },
-          { lat: 3.435164926, lng: 99.1578295 },
-          { lat: 7.435164926, lng: 99.2578295 },
-        ],
-
-        Area: 55,
+        Plotpolygon: polygonCoordinates,
+        PlotCenter: getcenter(polygonCoordinates),
+        Area: calculatePolygonArea(polygonCoordinates).toFixed(2),
         PlotAge: 8,
       };
 
@@ -95,7 +145,7 @@ function PlotRegister() {
       const errorMessage = error.message;
       setErrMsg(errorCode + '  ' + errorMessage);
     }
-    
+  
   };
   
   return (
@@ -147,11 +197,37 @@ function PlotRegister() {
             <div>
               <label htmlFor="PlotAge"class="info-plot">Plot Age: </label>
               <input
+                type="text"
+                id="PlotAge"
+                value={PlotAge}
                 class="form-style2"
-                
-            
+                onChange={(e) => regPlotAge(e.target.value)}
+                required
               />
             </div>
+
+            <div className="MapBoxContainerForDraw">
+              <h1>Check your rubber plot production</h1>
+              <iframe
+                src="/mapdrawing.html"
+                width="80%"
+                height="400px"
+                frameBorder="0"
+                title="Google Map"
+              ></iframe>
+              <div>
+                <h2>Polygon Coordinates:</h2>
+                <textarea
+                  rows={20}
+                  cols={60}
+                  readOnly
+                  value={JSON.stringify(polygonCoordinates)}
+                />
+                <h2>Polygon Area:</h2>
+                <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} sq km</p>
+              </div>
+            </div>
+
             <div>
        
             </div>

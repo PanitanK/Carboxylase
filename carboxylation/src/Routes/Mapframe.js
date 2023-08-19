@@ -38,7 +38,7 @@ const MapFrame = () => {
 
   return (
     <div className="MapBoxContainerForDraw">
-      <h1>Check your plot production</h1>
+      <h1>Check your rubber plot production</h1>
       <iframe
         src="/mapdrawing.html"
         width="80%"
