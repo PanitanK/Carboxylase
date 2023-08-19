@@ -253,11 +253,11 @@ function PlotRegister() {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                     <h2>Estimated yearly rubber production</h2>
-                    <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} kg</p>
+                    <p>{((calculatePolygonArea(polygonCoordinates)/ 0.0016)*230).toFixed(2)} kg</p>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                     <h2>Maximum Carbon Credit / Year</h2>
-                    <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} Credits</p>
+                    <p>{((calculatePolygonArea(polygonCoordinates)/ 0.0016 )*(44/12)*230*0.65 * (0.8825/(1000)) ).toFixed(2) } Credits</p>
                   </div>
                 </div>
             </div>

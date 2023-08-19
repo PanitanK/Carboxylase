@@ -21,10 +21,9 @@ function Home() {
   const [showSetting, setShowSetting] = useState(false); // State to track whether to show Setting component
   const [plotDocuments, setplotDocuments] = useState([])
   const [showDropdown, setShowDropdown] = useState(false);
-  //const [userPlotData , setUserPlotData] = useState(null);
+  const [MaximumCredit , setMaximumCredit] = useState(0);
 
-
-
+  
  
   const fetchPlotDocuments = async (userUID) => {
     const dataCollectionRef = collection(db, 'USERS', userUID, 'DataCollection');
@@ -62,7 +61,13 @@ function Home() {
         const plotDocuments = await fetchPlotDocuments(userUID);
         //console.log('Plot Documents:', plotDocuments[1].Plot_Number);
         setplotDocuments(plotDocuments)
-        
+
+        var sum = 0;
+        for (let i = 0; i < plotDocuments.length; i++) {
+          sum = sum + ((44/12)*((plotDocuments[i].Area / 0.0016)*230*0.65 * 0.8825  / (1000)))
+        }
+
+  setMaximumCredit(sum)
         if (userDocSnapshot.exists()) {
           const USERS_UID_SubCollection = collection(userDocRef, 'ProfileCollection');
           const USERS_UID_SubCollection_Snapshot = await getDocs(USERS_UID_SubCollection);
@@ -163,7 +168,7 @@ function Home() {
 
             <div className="credential-box">
               <div className='StaticMapBox'>
-                <StaticMapComponent initialCenter={{ lat: userData[0].Latitude, lng: userData[0].Longitude }} />  
+                <StaticMapComponent initialCenter={{ lat: userData[0].Latitude, lng: userData[0].Longitude,PlotDoc:plotDocuments }} />  
               </div>
 
              
@@ -193,6 +198,12 @@ function Home() {
                   <span className="info-label">Credit owned : </span>
                   <span className="Credit-own">{userData[0].Credit_Own}</span>
                   <span className="info-label"> Credits</span>
+                </div>
+
+                <div>
+                  <span className="info-label">Maximum Credit Cap: </span>
+                  <span className="Credit-own">{MaximumCredit.toFixed(2)}</span>
+                  <span className="info-label"> Credits/year</span>
                 </div>
 
               </div>

@@ -58,8 +58,8 @@ function PlotComponent(props) {
               </thead>
               <tbody style={{outline: '2px solid black'}} >
                   <tr style={{padding: '15' , margin: '3px'}} >
-                    <td  style={{outline: '2px solid black'}} >{props.plot.PlotCenter[0]}</td>
-                    <td >{props.plot.PlotCenter[1]}</td>
+                    <td  style={{outline: '2px solid black'}} >{props.plot.PlotCenter[0].toFixed(5)}</td>
+                    <td >{props.plot.PlotCenter[1].toFixed(5)}</td>
                   </tr>
                
               </tbody>
@@ -68,7 +68,7 @@ function PlotComponent(props) {
             <div style={{textAlign:"left" , lineHeight: "0.2",fontSize:"20px" }}>
 
               <div>
-              <span>Area: </span>
+              <span>Area : </span>
               <span style={{color:"green"}} >{props.plot.Area} </span> 
               <span>sq. kilometers</span>
               </div>
@@ -78,12 +78,20 @@ function PlotComponent(props) {
             <span style={{color:"green"}}>{ (props.plot.Area / 0.0016)*230  } </span>
             <span> kilograms ( Rate 230kg/rai/year )</span>
             </div>
-            <p> *rai is an area measurement unit in Thailand* </p>
-            <p> 1 rai = 0.0016 sqkm </p>
+            <p>Maximum Carbon Credit Applicable</p>
+            <p style={{color:"green"}}>{ ((44/12)*((props.plot.Area / 0.0016)*230*0.65 * 0.8825  / (1000))).toFixed(2)   } Credits  </p>
+            
 
             </div>
           </div>
+          
         </div>
+          <div style={{lineHeight: "0.2"}}>
+            <p> *rai is an area measurement unit in Thailand* </p>
+            <p> 1 rai = 0.0016 sqkm </p>
+            <p>Coversion rate for 1 kg of raw rubber to Credit of CO2 Captured is at 2.10 %</p>
+            <p>Explanation is in a pitch deck</p>
+          </div>
       </div>
     </div>
   );
