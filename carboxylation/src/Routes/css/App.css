@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding-top: 80px; 
+  padding-top: 40px;
   min-height: 100vh;
   box-sizing: border-box; 
 }
@@ -15,25 +15,24 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 .App-header {
-
   background-image: linear-gradient(rgba(255, 255, 255, 0.98), rgba(0, 0, 0, 0.97)) , url('../image/logo/4.png');
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-
+  background-attachment: fixed;
+  /* Add these properties to limit width and center content horizontally */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  
-
- 
+  max-width: 100%; /* Limit width to 100% */
+  margin: 0 auto; /* Center content horizontally */
 }
+
 
 .Contact {
   color: #ffffff;
@@ -63,8 +62,10 @@
   background-color: #6e7b89;
   color: #fff;
   padding: 10px;
+  height: 60px; /* Set the desired fixed height */
   display: flex;
   align-items: center;
+  z-index: 2;
 }
 
 
@@ -212,7 +213,7 @@
 }
 
 .footer {
-  outline: 1px solid black;
+
   background-color: #f0f0f000;
   padding-top: 60px;
   margin-top: 40px;
@@ -349,7 +350,8 @@
 }
 
 .Map-Box{
-  padding: 10%;
+  display: flex;
+  padding: 0%;
 }
 
 .Credit-own{
@@ -374,7 +376,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .centering-wrapper1{
-  width: 700px;
+  width: 1000px;
   margin: auto;
   margin-top: 100px;
   background-color: rgba(1, 14, 31, 0.25);
@@ -642,8 +644,26 @@ input::placeholder {
   color: #ffffff;
 }
 
-.MapBoxContainerForDraw{
-  width: 80%;
-  height: 80%;
+
+.Plotform.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
+.Plotform.form-container label {
+  margin-right: 10px;
+}
+
+.Plotform.form-container input,
+.Plotform.form-container textarea {
+  margin-bottom: 10px;
+}
+
+.MapBoxContainerForDraw {
+  width: 100%;
+  margin-bottom: 20px;
+  
+
+  
+}

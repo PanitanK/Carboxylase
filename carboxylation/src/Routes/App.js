@@ -7,7 +7,7 @@ import Mapframe from "./Mapframe";
 function App() {
 
   return (
-    <div className="App">
+    <div className="App" >
       <div className="static-bar">
         <div className="left-content">
           <a href="/">
@@ -31,7 +31,12 @@ function App() {
       <header className="App-header">
         <p>Main Page</p>
         <Mapframe />
-        <div className="footer"></div>
+        <Link to="/Register">
+          <button class="btn2" style={{ fontSize :'20px' ,paddingTop: '20px', paddingBottom: '20px' , paddingLeft: '40px' , paddingRight: '40px' }}>Join Us</button>
+        </Link>
+        <div className="footer">
+          
+        </div>
       </header>
     
     </div>

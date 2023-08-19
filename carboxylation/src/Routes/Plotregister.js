@@ -9,7 +9,7 @@ import { doc, setDoc,collection,getDocs} from 'firebase/firestore';
 
 function PlotRegister() {
   const [Plotname, regPlotname] = useState('');
-  const [PlotAge , regPlotAge] = useState(0);
+  const [PlotAge , regPlotAge] = useState();
   const [ErrMSG, setErrMsg] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -133,7 +133,7 @@ function PlotRegister() {
         Plotpolygon: polygonCoordinates,
         PlotCenter: getcenter(polygonCoordinates),
         Area: calculatePolygonArea(polygonCoordinates).toFixed(2),
-        PlotAge: 8,
+        PlotAge: 8
       };
 
       await AddPlotToDB(userUID, dataDocumentId, PlotCollection);
@@ -181,7 +181,12 @@ function PlotRegister() {
         )}
 
         {showPlotInput && (
-          <form onSubmit={handlePlotnameSubmit}>
+
+
+
+
+          <form onSubmit={handlePlotnameSubmit} className='Plotform form-container'>
+
             <div>
               <label htmlFor="Plotname"class="info-plot">Plotname: </label>
               <input
@@ -207,25 +212,54 @@ function PlotRegister() {
             </div>
 
             <div className="MapBoxContainerForDraw">
-              <h1>Check your rubber plot production</h1>
               <iframe
                 src="/mapdrawing.html"
-                width="80%"
+                width="100%"
                 height="400px"
                 frameBorder="0"
                 title="Google Map"
+              
               ></iframe>
-              <div>
-                <h2>Polygon Coordinates:</h2>
-                <textarea
-                  rows={20}
-                  cols={60}
-                  readOnly
-                  value={JSON.stringify(polygonCoordinates)}
-                />
-                <h2>Polygon Area:</h2>
-                <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} sq km</p>
-              </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <h2>Polygon Coordinates</h2>
+                    <table style={{ color: 'white', backgroundColor: 'transparent', width: '80%' }}>
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Latitude</th>
+                          <th>Longitude</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {polygonCoordinates.map((coord, index) => (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{coord.lat}</td>
+                            <td>{coord.lng}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <h2>Polygon Area</h2>
+                    <p style={{ textAlign: 'center', margin: 0 }}>
+                      <span style={{ display: 'block', marginTop: 'auto', marginBottom: 'auto' }}>
+                        {calculatePolygonArea(polygonCoordinates).toFixed(2)} sq km
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <h2>Estimated yearly rubber production</h2>
+                    <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} kg</p>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <h2>Maximum Carbon Credit / Year</h2>
+                    <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} Credits</p>
+                  </div>
+                </div>
             </div>
 
             <div>
@@ -234,6 +268,9 @@ function PlotRegister() {
             <p>{ErrMSG}</p>
             <button type="submit"class="submit-button">ENTER</button>
           </form>
+
+
+
         )}
       </div>
     </div>
