@@ -490,9 +490,10 @@ input::placeholder {
 }
 
 .submit-button{
-  background-color: #161616; 
-  color: white; 
+  background-color: #474747; 
+  color: rgb(255, 255, 255); 
   border: none; 
+  margin-top: 20px;
   padding: 10px 20px; 
   text-align: center; 
   text-decoration: none; 
