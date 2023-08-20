@@ -161,7 +161,7 @@ function Home() {
         ) : (
 
           <div className='Home-Page'>
-            <h1 class="primary-header4">Welcome back {userData[0].Name}</h1>
+            <h1 class="primary-header10">Welcome back {userData[0].Name}</h1>
             <p class="primary-header5">Your Hometown is {userData && userData[0].Hometown}</p>
             
 
@@ -214,7 +214,7 @@ function Home() {
           <PlotComponent key={`${plot.id}-${index}`} plot={plot} plotIndex={index + 1} />
         ))}
            <div className='AddPlot'>  
-            <button className='addPlotButton' onClick={PlotReg} >+ Add New Plot</button>
+            <button class="submit-button" onClick={PlotReg} >+ Add New Plot</button>
           </div>
         </div>
    

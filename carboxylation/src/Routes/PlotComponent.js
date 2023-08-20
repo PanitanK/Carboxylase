@@ -29,12 +29,12 @@ function PlotComponent(props) {
           src={ToggleArrow}
           alt="Toggle Arrow"
         />
-        <p className="plot-number">No.{props.plot.Plot_Number}</p>
+        <p className="plot-number1">No.{props.plot.Plot_Number}</p>
       </span>
 
         </div>
 
-        <span>{`Plot :  ${props.plot.Plotname} `}</span>
+        <span className="plot-number2">{`Plot :  ${props.plot.Plotname} `}</span>
         <img src={Gear} alt="Gear" className="gear"  onClick={navigateToPage} />
 
       </div>
@@ -48,38 +48,38 @@ function PlotComponent(props) {
           
           
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <h2>Plot Coordinates</h2>
+            <h2 class="primary-header1">Plot Coordinates</h2>
             <table style={{ color: 'Black', backgroundColor: 'transparent', width: '100%' }}>
               <thead>
                 <tr style={{outline: '2px solid black'}}>
-                  <th style={{outline: '2px solid black'}}>Latitude</th>
-                  <th>Longitude</th>
+                  <th style={{outline: '2px solid black'}}className="primary-header9">Latitude</th>
+                  <th className="primary-header9">Longitude</th>
                 </tr>
               </thead>
               <tbody style={{outline: '2px solid black'}} >
                   <tr style={{padding: '15' , margin: '3px'}} >
-                    <td  style={{outline: '2px solid black'}} >{props.plot.PlotCenter[0].toFixed(5)}</td>
-                    <td >{props.plot.PlotCenter[1].toFixed(5)}</td>
+                    <td  style={{outline: '2px solid black'}} className="primary-header9">{props.plot.PlotCenter[0].toFixed(5)}</td>
+                    <td className="primary-header9">{props.plot.PlotCenter[1].toFixed(5)}</td>
                   </tr>
                
               </tbody>
             </table>
-            <p>Plot data</p>
+            <p className="primary-header9">Plot data</p>
             <div style={{textAlign:"left" , lineHeight: "0.2",fontSize:"20px" }}>
 
               <div>
-              <span>Area : </span>
-              <span style={{color:"green"}} >{props.plot.Area} </span> 
-              <span>sq. kilometers</span>
+              <span className="primary-header9">Area : </span>
+              <span style={{color:"green"}} className="primary-header9">{props.plot.Area} </span> 
+              <span className="primary-header9">sq. kilometers</span>
               </div>
 
-            <p>Est. Yearly Raw Rubber Production </p>
+            <p className="primary-header9">Est. Yearly Raw Rubber Production </p>
             <div>
-            <span style={{color:"green"}}>{ (props.plot.Area / 0.0016)*230  } </span>
-            <span> kilograms ( Rate 230kg/rai/year )</span>
+            <span style={{color:"green"}} className="primary-header9">{ (props.plot.Area / 0.0016)*230  } </span>
+            <span className="primary-header9"> kilograms ( Rate 230kg/rai/year )</span>
             </div>
-            <p>Maximum Carbon Credit Applicable</p>
-            <p style={{color:"green"}}>{ ((44/12)*((props.plot.Area / 0.0016)*230*0.65 * 0.8825  / (1000))).toFixed(2)   } Credits  </p>
+            <p className="primary-header9">Maximum Carbon Credit Applicable</p>
+            <p style={{color:"green"}} className="primary-header9">{ ((44/12)*((props.plot.Area / 0.0016)*230*0.65 * 0.8825  / (1000))).toFixed(2)   } Credits  </p>
             
 
             </div>
@@ -87,10 +87,10 @@ function PlotComponent(props) {
           
         </div>
           <div style={{lineHeight: "0.2"}}>
-            <p> *rai is an area measurement unit in Thailand* </p>
-            <p> 1 rai = 0.0016 sqkm </p>
-            <p>Coversion rate for 1 kg of raw rubber to Credit of CO2 Captured is at 2.10 %</p>
-            <p>Explanation is in a pitch deck</p>
+            <p className="primary-header9"> *rai is an area measurement unit in Thailand* </p>
+            <p className="primary-header9"> 1 rai = 0.0016 sqkm </p>
+            <p className="primary-header9">Coversion rate for 1 kg of raw rubber to Credit of CO2 Captured is at 2.10 %</p>
+            <p className="primary-header9">Explanation is in a pitch deck</p>
           </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ const MapFrame = () => {
 
   return (
     <div className="MapBoxContainerForDraw">
-      <h1 style={{color : "black"}} >Check your plot production</h1>
+      <h1 style={{color : "black"}} class="primary-header1" >Check your plot production</h1>
       <iframe
         src="/mapdrawing.html"
         width="80%"
@@ -51,14 +51,14 @@ const MapFrame = () => {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', justifyContent: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <h2>Polygon Coordinates</h2>
+          <h2 class="primary-header7">Polygon Coordinates</h2>
           <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
           <table style={{ color: 'white', backgroundColor: 'transparent', width: '100%' }}>
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+                <th class="primary-header6">No.</th>
+                <th class="primary-header6">Latitude</th>
+                <th class="primary-header6">Longitude</th>
               </tr>
             </thead>
             <tbody>
@@ -74,21 +74,21 @@ const MapFrame = () => {
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <h2>Polygon Area</h2>
+          <h2 class="primary-header7">Polygon Area</h2>
           
           <p style={{ textAlign: 'center', margin: 0 }}>
-            <span style={{ display: 'block', marginTop: 'auto', marginBottom: 'auto' }}>
+            <span style={{ display: 'block', marginTop: 'auto', marginBottom: 'auto' }} class="primary-header6">
               {calculatePolygonArea(polygonCoordinates).toFixed(2)} sq km
             </span>
           </p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <h2>Estimated yearly rubber production</h2>
-          <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} kg</p>
+          <h2 class="primary-header7">Estimated yearly rubber production</h2>
+          <p class="primary-header6">{calculatePolygonArea(polygonCoordinates).toFixed(2)} kg</p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <h2>Maximum Carbon Credit / Year</h2>
-          <p>{calculatePolygonArea(polygonCoordinates).toFixed(2)} Credits</p>
+          <h2 class="primary-header7">Maximum Carbon Credit / Year</h2>
+          <p class="primary-header6">{calculatePolygonArea(polygonCoordinates).toFixed(2)} Credits</p>
         </div>
       </div>
 

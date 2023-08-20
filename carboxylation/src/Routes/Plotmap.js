@@ -35,7 +35,7 @@ function Plotmap({ coordinates }) {
             />
         </GoogleMap>
       </LoadScript>
-      <p>Area within the polygon: {area.toFixed(2)} square meters</p>
+      <p className="primary-header9">Area within the polygon: {area.toFixed(2)} square meters</p>
     </div>
   );
 }
