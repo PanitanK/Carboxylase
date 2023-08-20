@@ -104,7 +104,7 @@ function Setting({ userUID, onDataUpdate }) {
     }, [userUID, userCollectionRef, HasFetched]);
 
     if (!userData) {
-        return <h1>THIS IS UID : {userUID}</h1>;
+        return <h1>Loading . . . </h1>;
     }
 
     const initialCenter = {
