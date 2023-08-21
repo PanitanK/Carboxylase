@@ -29,7 +29,7 @@ function App() {
       </div>
 
       <header className="App-header">
-        <p>Main Page</p>
+        <p >Main Page</p>
         <Mapframe />
         <Link to="/Register">
           <button class="btn2" style={{ fontSize :'20px' ,paddingTop: '20px', paddingBottom: '20px' , paddingLeft: '40px' , paddingRight: '40px' }}>Join Us</button>

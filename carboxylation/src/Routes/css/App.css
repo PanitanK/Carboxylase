@@ -363,6 +363,12 @@
 .Credit-own{
   color: #319540;
   font-weight: bold;
+  font-size: 20px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 5%;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .centering-wrapper{
@@ -468,6 +474,52 @@
   margin-bottom: 8px;
   font-family:'Courier New', Courier, monospace;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.primary-header6{
+  color: #ffffff;
+  font-size: 30px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.primary-header7{
+  color: #ffffff;
+  font-size: 40px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 5%;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.primary-header8{
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 5%;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.primary-header9{
+  color: #000000;
+  font-size: 20px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 5%;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.primary-header10{
+  color: #000000;
+  font-size: 50px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 20px;
 }
 .input-position{
   margin-top: 20px;
@@ -641,6 +693,27 @@ input::placeholder {
 }
 .plot-number {
   margin-left: 10px; /* Adjust the value as needed */
+}
+.plot-number1 {
+  margin-left: 10px;
+  margin-top: 5px;
+  color: #000000;
+  font-size: 30px;
+  line-height: 30px; 
+  font-weight: 800;
+  margin-bottom: 5%;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.plot-number2 {
+  margin-left: 10px;
+  margin-top: 8px;
+  color: #000000;
+  font-size: 30px;
+  line-height: 30px; 
+  font-weight: 800;
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .info-plot{
   font-family:'Courier New', Courier, monospace;

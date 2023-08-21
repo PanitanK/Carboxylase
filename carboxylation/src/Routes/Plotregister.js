@@ -223,41 +223,41 @@ function PlotRegister() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', justifyContent: 'center' }}>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <h2>Polygon Coordinates</h2>
+                    <h2 class="primary-header8">Polygon Coordinates</h2>
                     <table style={{ color: 'white', backgroundColor: 'transparent', width: '80%' }}>
                       <thead>
                         <tr>
-                          <th>No.</th>
-                          <th>Latitude</th>
-                          <th>Longitude</th>
+                          <th class="primary-header8">No.</th>
+                          <th class="primary-header8">Latitude</th>
+                          <th class="primary-header8">Longitude</th>
                         </tr>
                       </thead>
                       <tbody>
                         {polygonCoordinates.map((coord, index) => (
                           <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{coord.lat}</td>
-                            <td>{coord.lng}</td>
+                            <td class="primary-header8">{index + 1}</td>
+                            <td class="primary-header8">{coord.lat}</td>
+                            <td class="primary-header8">{coord.lng}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <h2>Polygon Area</h2>
-                    <p style={{ textAlign: 'center', margin: 0 }}>
-                      <span style={{ display: 'block', marginTop: 'auto', marginBottom: 'auto' }}>
+                    <h2 class="primary-header8">Polygon Area</h2>
+                    <p style={{ textAlign: 'center', margin: 0 }} >
+                      <span style={{ display: 'block', marginTop: 'auto', marginBottom: 'auto' }}class="primary-header8">
                         {calculatePolygonArea(polygonCoordinates).toFixed(2)} sq km
                       </span>
                     </p>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <h2>Estimated yearly rubber production</h2>
-                    <p>{((calculatePolygonArea(polygonCoordinates)/ 0.0016)*230).toFixed(2)} kg</p>
+                    <h2 class="primary-header8">Estimated yearly rubber production</h2>
+                    <p class="primary-header8">{((calculatePolygonArea(polygonCoordinates)/ 0.0016)*230).toFixed(2)} kg</p>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <h2>Maximum Carbon Credit / Year</h2>
-                    <p>{((calculatePolygonArea(polygonCoordinates)/ 0.0016 )*(44/12)*230*0.65 * (0.8825/(1000)) ).toFixed(2) } Credits</p>
+                    <h2 class="primary-header8">Maximum Carbon Credit / Year</h2>
+                    <p class="primary-header8">{((calculatePolygonArea(polygonCoordinates)/ 0.0016 )*(44/12)*230*0.65 * (0.8825/(1000)) ).toFixed(2) } Credits</p>
                   </div>
                 </div>
             </div>
