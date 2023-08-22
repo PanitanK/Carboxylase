@@ -19,9 +19,9 @@ function PlotRegister() {
   const [showPlotInput, setShowPlotInput] = useState(false);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 
-  
+
   useEffect(() => {
-    console.log(userUID);
+    window.scrollTo(0, 60); // Scroll to the top of the page
     if (userUID) {
       console.log('userUID OK');
       setShowPlotInput(true);

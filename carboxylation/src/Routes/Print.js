@@ -14,7 +14,7 @@ const Print = () => {
 
   return (
     <div className="App">
-      <div className="static-bar">
+      <div className="static-bar" id="static-bar" >
         <div className="left-content">
         
             <img src={Title} alt="Title"    onClick={() => {
@@ -30,7 +30,7 @@ const Print = () => {
           </button>
         </div>
       </div>
-    
+      <div className='Printpage'>
         <div className="info-container2 ">
           
             <div>
@@ -85,7 +85,7 @@ const Print = () => {
                   />
                 </div>
 
-                <div >
+                <div className="PlotDataset">
                   <h2>Plot Coordinates</h2>
                   <table style={{ color: 'Black', backgroundColor: 'transparent', width: '100%' }}>
                     <thead>
@@ -106,7 +106,7 @@ const Print = () => {
                     </tbody>
                   </table>
                   <p className="primary-header9">Plot data</p>
-                  <div style={{ textAlign: 'left', lineHeight: '0.2', fontSize: '5px' }}>
+                  <div style={{ textAlign: 'left', lineHeight: '0.1', fontSize: '5px' }}>
                     <div>
                       <span className="primary-header9">Area : </span>
                       <span style={{ color: 'green' }} className="primary-header9">
@@ -131,6 +131,7 @@ const Print = () => {
             ))}
         </div>
       </div>
+    </div>
 
   );
 };

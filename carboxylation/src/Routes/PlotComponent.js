@@ -87,10 +87,10 @@ function PlotComponent(props) {
           
         </div>
           <div style={{lineHeight: "0.2"}}>
-            <p className="primary-header9"> *rai is an area measurement unit in Thailand* </p>
-            <p className="primary-header9"> 1 rai = 0.0016 sqkm </p>
-            <p className="primary-header9">Coversion rate for 1 kg of raw rubber to Credit of CO2 Captured is at 2.10 %</p>
-            <p className="primary-header9">Explanation is in a pitch deck</p>
+            <p> *rai is an area measurement unit in Thailand* </p>
+            <p> 1 rai = 0.0016 sqkm </p>
+            <p>Coversion rate for 1 kg of raw rubber to Credit of CO2 Captured is at 2.10 %</p>
+            <p>Explanation is in a pitch deck</p>
           </div>
       </div>
     </div>

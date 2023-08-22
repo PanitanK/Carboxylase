@@ -129,15 +129,21 @@ function Home() {
               <img src={Gear} alt="Gear" className="gear" />
               {showDropdown && (
                 <div className="dropdown">
+
                   <button onClick={() => {
                     navigate('/Home', { state: { userUID } })
                     setShowSetting(false); }
                   }>
                     Home
                   </button>
-                  <button onClick={() => navigate('/Home/Profile', { state: { userUID } })}>
-                    Profile
+
+                  <button onClick={() => {
+                    navigate('/Print', { state: { userUID,userData, plotDocuments, MaximumCredit } })
+                    setShowSetting(false); }
+                  }>
+                    Print
                   </button>
+
                   <button
                     onClick={() => {
                       setShowSetting(true); 
@@ -146,9 +152,11 @@ function Home() {
                   >
                     Setting
                   </button>
+
                   <button onClick={() => navigate("/")}>
                     Logout  
                   </button>
+
                 </div>
               )}
             </div>

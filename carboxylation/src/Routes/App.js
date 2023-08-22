@@ -3,8 +3,13 @@ import Title from './image/logo/CBX_Transparent.png';
 import './css/App.css';
 import Mapframe from "./Mapframe";
 import Credit from './image/logo/Credit.png'
-
+import { useEffect } from 'react';
 function App() {
+  
+   useEffect(() => {
+    window.scrollTo(0, 60); // Scroll to the top of the page
+    // ... other useEffect code ...
+  }, []);
 
   return (
     <div className="App" >
