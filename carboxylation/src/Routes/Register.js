@@ -2,7 +2,7 @@ import './css/App.css';
 //import { Link } from "react-router-dom";
 import Title from './image/logo/CBX_Transparent.png';
 import placeholderImage from './image/logo/Placeholder.png';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { auth , db ,storage } from './Firebase';
@@ -12,7 +12,10 @@ import {  ref , uploadBytes} from 'firebase/storage';
 
 
 function Register() {
-
+  useEffect(() => {
+    window.scrollTo(0, 200); // Scroll to the top of the page
+    // ... other useEffect code ...
+  }, []);
  
   const [email, regEmail] = useState('');
   const [password, regPassword] = useState('');
@@ -134,7 +137,7 @@ function Register() {
     </div>
 
      <div className="App-header">
-      <div className="centering-wrapper">
+      <div className="centering-wrapper"style={{ transform: "scale(0.8)" }} >
         <div className="section1 text-center">
           <div className="primary-header"><h1>Register</h1></div>        
         
