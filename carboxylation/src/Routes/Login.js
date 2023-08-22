@@ -1,7 +1,7 @@
 import './css/App.css';
 import Title from './image/logo/CBX_Transparent.png';
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from './Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,11 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 100); // Scroll to the top of the page
+    // ... other useEffect code ...
+  }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -56,7 +61,7 @@ function Login() {
       </div>
 
       <div className="App-header"> 
-      <div className="centering-wrapper">
+      <div className="centering-wrapper" style={{ transform: "scale(0.8)" }} >
       <div className="section1 text-center">
         
       <div className="primary-header"><h1>Login</h1></div>
