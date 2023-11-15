@@ -19,7 +19,7 @@ function StaticMapComponent({ initialCenter }) {
     return `label:${index + 1}|${coordinate[0]},${coordinate[1]}`;
   }).join('&markers=');
 
-  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${initialCenter.lat},${initialCenter.lng}&zoom=8&size=400x400&maptype=satellite&markers=${markers}&key=${apiKey}`;
+  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${initialCenter.lat},${initialCenter.lng}&zoom=14&size=400x400&maptype=satellite&markers=${markers}&key=${apiKey}`;
 
   return (
     <div>

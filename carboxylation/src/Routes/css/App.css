@@ -434,7 +434,9 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .primary-header1{
-  color: #000000;
+  line-height: 5px;
+  text-align: left;
+  color: #ae1616;
   font-size: 50px;
   line-height: 30px; 
   font-weight: 800;
